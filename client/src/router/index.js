@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Welcome from '@/components/Welcome'
+import Maps from '@/components/Maps'
+import Panel from '@/components/Panel'
 
 Vue.use(Router)
 
@@ -8,8 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Welcome',
-      component: Welcome
+      name: 'panel',
+      component: Panel
+    },
+    {
+      path: '/maps',
+      name: 'maps',
+      component: Maps
     }
   ]
 })
