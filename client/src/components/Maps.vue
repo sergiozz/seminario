@@ -39,42 +39,42 @@ export default {
     this.mapas = [{             
       universidad: "fiuba",
       sedes:  [{
-        nombre: "paseo colon",
+        nombre: "Paseo Colón",
         pisos: [{
-          nombre: "planta baja",
+          nombre: "Planta baja",
           imagen: "pc-planta_baja.jpg "
         },
         {
-          nombre: "primer subsuelo",
-          imagen: "pc-subsuelo.jpg "
-        },
-        {
-          nombre: "segundo subsuelo",
-          imagen: "pc-subsuelo_2.jpg "
-        },
-        {
-          nombre: "primer piso",
+          nombre: "Primer piso",
           imagen: "pc-primer_piso.jpg "
         },
         {
-          nombre: "segundo piso",
+          nombre: "Segundo piso",
           imagen: "pc-segundo_piso.jpg "
         },
         {
-          nombre: "tercer piso",
+          nombre: "Tercer piso",
           imagen: "pc-tercer_piso.jpg "
         },
         {
-          nombre: "cuarto piso",
+          nombre: "Cuarto piso",
           imagen: "pc-cuarto_piso.jpg "
         },
         {
-          nombre: "quito piso",
+          nombre: "Quito piso",
           imagen: "pc-quinto_piso.jpg "
+        },
+        {
+          nombre: "Primer subsuelo",
+          imagen: "pc-subsuelo.jpg "
+        },
+        {
+          nombre: "Segundo subsuelo",
+          imagen: "pc-subsuelo_2.jpg "
         }]
       },
       {
-        nombre: "las heras",
+        nombre: "Las Heras",
         pisos: []
       }]
     }];

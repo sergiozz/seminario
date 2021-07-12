@@ -3,6 +3,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
       <a class="navbar-brand" href="/#"><img src="../assets/images/grails.svg" alt="Grails Logo"/></a>
+      <a class="navbar-brand" href="/#"><img  style="width: 80px;" src="../assets/logo.png" alt="Vue Logo"/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
               aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,7 +20,7 @@
               <li v-if="serverInfo" class="dropdown-item"><a href="#">Cambiar Aula</a></li>
 
               <li role="separator" class="divider dropdown-item"></li>
-              <li v-if="serverInfo" class="dropdown-item"><a href="#/maps">Ver mapas</a></li>
+              <li class="dropdown-item"><a href="#/maps">Ver mapas</a></li>
             </ul>
           </li>
 
@@ -31,6 +32,10 @@
               <li v-if="serverInfo.artefacts"><a href="#">Domains: {{serverInfo.artefacts.domains}}</a></li>
               <li v-if="serverInfo.artefacts"><a href="#">Services: {{serverInfo.artefacts.services}}</a></li>
             </ul>
+            <ul class="dropdown-menu" v-if="!serverInfo">
+              <li><a href="#">Server Down</a></li>
+            </ul>
+            
 
           </li>
           <li class="dropdown">
@@ -43,8 +48,8 @@
     </nav>
 
     <div id="content" role="main">
-      <section class="row colset-2-its">
-        <h1>Ubicando</h1> 
+      <section class="row colset-2-its" style=" max-width: none;">
+        <h1 class="logot">Ubicando</h1> 
         
         <a  href="#/maps"> <h3> Ver mapas</h3></a>
 
@@ -117,8 +122,16 @@ export default {
     margin-right: -161px;
     margin-bottom: 88px;
   }
+
+  .logot { 
+    color: #d54d7b; 
+    font-family: "Great Vibes", cursive; 
+    font-size: 56px !important;
+    text-shadow: 0 1px 1px #fff; 
+  }
   
   .footer {
+    max-width: none;
     font-size: 0.9em;
   }
 </style>
