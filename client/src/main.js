@@ -8,6 +8,7 @@ import './assets/css/main.css'
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import ZoomOnHover from "vue-zoom-on-hover";
+import {store} from "./store/store";
 
 Vue.config.productionTip = false
 
@@ -22,6 +23,7 @@ Vue.use(ZoomOnHover);
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

@@ -24,7 +24,7 @@
             </ul>
           </li>
 
-          <li class="dropdown">
+          <li class="dropdown"> 
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                aria-expanded="true">Status<span class="caret"></span></a>
             <ul class="dropdown-menu" v-if="serverInfo">
@@ -34,8 +34,7 @@
             </ul>
             <ul class="dropdown-menu" v-if="!serverInfo">
               <li><a href="#">Server Down</a></li>
-            </ul>
-            
+            </ul>            
 
           </li>
           <li class="dropdown">
@@ -47,11 +46,17 @@
       </div>
     </nav>
 
+
+
     <div id="content" role="main">
       <section class="row colset-2-its" style=" max-width: none;">
         <h1 class="logot">Ubicando</h1> 
-        
-        <a  href="#/maps"> <h3> Ver mapas</h3></a>
+
+        <div>
+          <b-form-select v-model="$store.state.seleccionRol" :options="consts.ROLES" class="m-2 roleselecion"/>
+        </div>
+        <a href="#/maps" style="margin: 12px;"> <h3> Ver mapas</h3></a>    
+        <a href="#/" style="margin: 12px;"> <h3> Acciones</h3></a>
 
         <router-view />
        
@@ -66,6 +71,8 @@
       </section>
     </div>
 
+
+
     <div class="footer row" role="contentinfo">
     </div>
 
@@ -73,20 +80,25 @@
 </template>
 
 <script>
+import aux from '../consts'
+
 export default {
-  name: 'welcome',
+  name: 'principal',
   data () {
     return {
       msg: 'Welcome to Your Grails & Vue.js App',
       serverInfo: null,
       showLinks: false,
-      serverURL: process.env.VUE_APP_SERVER_URL
+      serverURL: process.env.VUE_APP_SERVER_URL,
+      roles: [],
+      consts: aux
     }
   },
   created () {
     fetch(`${this.serverURL}/application`)
       .then(response => response.json())
       .then(json => (this.serverInfo = json))
+    
   }
 }
 </script>
@@ -128,6 +140,13 @@ export default {
     font-family: "Great Vibes", cursive; 
     font-size: 56px !important;
     text-shadow: 0 1px 1px #fff; 
+  }
+
+  .roleselecion {
+    font-size: 18px;
+    color: blue;
+    border-radius: 2.25rem;
+    background: #e7e7e7;
   }
   
   .footer {
