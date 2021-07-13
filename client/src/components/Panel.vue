@@ -36,13 +36,13 @@
       </div>
 
       <div class="col-5">
-        <h3 v-if="$store.state.seleccionRol">{{consts.ROLES[$store.state.seleccionRol].text}}</h3>
+        <h3 v-if="$store.state.seleccionRol != consts.ROLSD">{{$store.state.seleccionRol}}</h3>
 
-        <div v-if="$store.state.seleccionRol == 1">
+        <div v-if="$store.state.seleccionRol == consts.ROLDC">
           <b-form-select v-model="seleccionAccion" :options="actionsDoc" class="m-2 roleselecion"/>
         </div>
 
-        <div v-if="$store.state.seleccionRol == 2">
+        <div v-if="$store.state.seleccionRol == consts.ROLAL">
           <b-form-select v-model="seleccionAccion" :options="actionsAlum" class="m-2 roleselecion"/>
         </div>
 
@@ -109,4 +109,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 </style>

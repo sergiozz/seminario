@@ -1,28 +1,42 @@
-export default {      
+const ROLSD = "-- Seleccione Rol --";
+const ROLDC = "Rol Docente";
+const ROLAL = "Rol Alumno";
+const ROLND = "Rol No docente";
+const ROLMDD = "Rol Miembro de Departamento";
+const ROLADMIN = "Rol Administrador";
+
+export default { 
+    ROLSD: ROLSD,    
+    ROLDC: ROLDC,    
+    ROLAL: ROLAL,    
+    ROLND: ROLND,    
+    ROLMDD: ROLMDD,    
+    ROLADMIN: ROLADMIN,
+        
     ROLES : [
     { 
-        value: 0, 
-        text: '-- Seleccione Rol --' 
+        value: ROLSD, 
+        text: ROLSD 
     },
     {
-        value: 1, 
-        text: "Rol Docente"
+        value: ROLDC, 
+        text: ROLDC
     },
     {
-        value: 2, 
-        text: "Rol Alumno"
+        value: ROLAL, 
+        text: ROLAL
     },
     {
-        value: 3, 
-        text: "Rol No docente"
+        value: ROLND, 
+        text: ROLND
     },
     {
-        value: 4, 
-        text: "Rol Miembro de Departamento"
+        value: ROLMDD, 
+        text: ROLMDD
     },
     {
-        value: 5, 
-        text: "Rol Administrador"
+        value: ROLADMIN, 
+        text: ROLADMIN
     }]
   }
   
