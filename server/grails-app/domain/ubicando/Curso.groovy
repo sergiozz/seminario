@@ -3,11 +3,16 @@ package ubicando
 class Curso {
 
     ArrayList<Horario> horarios
+    Docente docenteTitular
+    String codMateria
+    String materia
+    Integer numCurso
+    boolean aceptaSuscripcion = true
+    Aula aulaActual
 
     static constraints = {
     }
 
-    //TODO logica de superposicion de horarios
     boolean superpuesto(Curso otroCurso) {
         boolean superpuesto = false
         int i = 0
@@ -20,17 +25,5 @@ class Curso {
             i++
         }
         return !superpuesto
-
-
-
-        /*
-        int superposiciones = 0
-        horarios.each {
-            Horario h1 -> otroCurso.horarios.each {
-                Horario h2 -> superposiciones += h1.superposicion(h2)
-            }
-        }
-        return (superposiciones > 0)
-         */
     }
 }

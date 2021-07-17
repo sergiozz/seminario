@@ -22,6 +22,7 @@ class Aula {
     def agregarCurso(Curso curso){
         if(puedeAgregarCurso(curso)){
             cursos.add(curso)
+            curso.setAulaActual(this)
         }
     }
 }
