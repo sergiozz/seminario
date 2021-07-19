@@ -1,15 +1,18 @@
 package ubicando
 
+import java.time.LocalDateTime
+
 class Aula {
 
     String numero
     Integer Piso
     ArrayList<Curso> cursos = new ArrayList<Curso>()
+    ArrayList<Examen> examenes = new ArrayList<Examen>()
 
     static constraints = {
     }
 
-    private boolean puedeAgregarCurso(Curso curso){
+    boolean puedeAgregarCurso(Curso curso){
         boolean superpuesto = false
         int i = 0
         while (!superpuesto && i < cursos.size()){
@@ -19,10 +22,18 @@ class Aula {
        return !superpuesto
     }
 
-    def agregarCurso(Curso curso){
+    void agregarCurso(Curso curso){
         if(puedeAgregarCurso(curso)){
             cursos.add(curso)
             curso.setAulaActual(this)
         }
+    }
+
+    boolean  puedeAgregarExamen(LocalDateTime fecha, Examen examen){
+        //TODO
+    }
+
+    void agregarExamen(LocalDateTime fecha, Examen examen){
+        //TODO
     }
 }

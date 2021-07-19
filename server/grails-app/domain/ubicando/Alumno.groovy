@@ -4,7 +4,7 @@ class Alumno {
 
     String Nombre
     String Apellido
-    ArrayList<Curso> cursosSuscriptos = new ArrayList<>()
+    ArrayList<Curso> cursosSuscriptos = new ArrayList<Curso>()
 
     final Integer MAXSUSCRIPCIONES = 10
 
