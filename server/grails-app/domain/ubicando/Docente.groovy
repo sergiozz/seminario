@@ -1,5 +1,8 @@
-package ubicando
+package dominio
 
+import grails.rest.Resource
+
+@Resource(uri = '/docente')
 class Docente {
 
     String Nombre

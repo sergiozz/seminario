@@ -4,12 +4,11 @@ proyecto para seminario
 
 #  para el cliente
 
-en ./client/
-
+en ./client/ para instalar dependencias
 ```
     npm install 
 ```
-    para instalar dependencias
+    
 ```
     npm run serve 
 ```

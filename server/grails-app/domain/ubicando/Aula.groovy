@@ -1,7 +1,9 @@
-package ubicando
+package dominio
 
 import java.time.LocalDateTime
+import grails.rest.Resource
 
+@Resource(uri = '/aula')
 class Aula {
 
     String numero
