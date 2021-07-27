@@ -21,6 +21,16 @@ ejecutar en ./
     ./gradlew server:bootRun 
 ```
 
+o en ./server/
+```
+    grails run-app
+```
+
+para ejecutar los test en ./server/
+```
+    grails test-app
+```
+
 # requisitos
 
 jdk
