@@ -1,11 +1,9 @@
-package dominio
-import grails.rest.Resource
+package ubicando
 
-@Resource(uri = '/alumno')
 class Alumno {
 
-    String Nombre
-    String Apellido
+    String nombre
+    String apellido
     ArrayList<Curso> cursosSuscriptos = new ArrayList<Curso>()
 
     final Integer MAXSUSCRIPCIONES = 10

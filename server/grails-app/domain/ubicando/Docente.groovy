@@ -1,12 +1,9 @@
-package dominio
+package ubicando
 
-import grails.rest.Resource
-
-@Resource(uri = '/docente')
 class Docente {
 
-    String Nombre
-    String Apellido
+    String nombre
+    String apellido
     ArrayList<Curso> titularDeCursos = new ArrayList<Curso>()
 
     static constraints = {

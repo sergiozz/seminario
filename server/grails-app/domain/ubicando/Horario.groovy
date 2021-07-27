@@ -1,7 +1,4 @@
-package dominio
-import grails.rest.Resource
-
-@Resource(uri = '/horario')
+package ubicando
 class Horario {
 
     Integer horaDesde

@@ -1,7 +1,5 @@
-package dominio
-import grails.rest.Resource
+package ubicando
 
-@Resource(uri = '/curso')
 class Curso {
 
     ArrayList<Horario> horarios

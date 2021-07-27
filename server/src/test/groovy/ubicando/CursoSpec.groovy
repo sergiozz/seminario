@@ -13,6 +13,6 @@ class CursoSpec extends Specification implements DomainUnitTest<Curso> {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            //true == false
     }
 }

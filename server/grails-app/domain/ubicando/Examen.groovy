@@ -1,7 +1,4 @@
-package dominio
-import grails.rest.Resource
-
-@Resource(uri = '/examen')
+package ubicando
 class Examen {
 
     static constraints = {

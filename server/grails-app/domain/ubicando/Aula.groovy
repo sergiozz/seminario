@@ -1,13 +1,11 @@
-package dominio
+package ubicando
 
 import java.time.LocalDateTime
-import grails.rest.Resource
 
-@Resource(uri = '/aula')
 class Aula {
 
     String numero
-    Integer Piso
+    Integer piso
     ArrayList<Curso> cursos = new ArrayList<Curso>()
     ArrayList<Examen> examenes = new ArrayList<Examen>()
 
