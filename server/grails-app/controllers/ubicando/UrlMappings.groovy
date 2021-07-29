@@ -11,6 +11,8 @@ class UrlMappings {
         patch "/$controller/$id(.$format)?"(action:"patch")
 
         "/"(controller: 'application', action:'index')
+        "/alumno/acciones"(controller: 'alumno', action:'acciones')
+
         "500"(view: '/error')
         "404"(view: '/notFound')
     }

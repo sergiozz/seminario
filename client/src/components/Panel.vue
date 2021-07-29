@@ -60,6 +60,7 @@ export default {
   data () {
     return {
       consts: aux,
+      serverURL: process.env.VUE_APP_SERVER_URL,
       seleccionAccion: 0,
       actionsDoc : [
       { 
@@ -103,7 +104,15 @@ export default {
   },
   created () {
    
+  },
+  methods: {
+    getAcciones() {
+    fetch(`${this.serverURL}/alumno/acciones`)
+      .then(response => response.json())
+      .then(json => (this.serverInfo = json.data))    
+    }
   }
+ 
 }
 </script>
 
