@@ -2,6 +2,7 @@ package ubicando
 
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
+//import static Constants.*
 
 @Service(Alumno)
 abstract class AlumnoService {
@@ -21,11 +22,13 @@ abstract class AlumnoService {
     @Transactional
     protected abstract Alumno save(Alumno alumno)
 
+    
+/*
 	ArrayList getCurrent() {
-        ["Failed to update book","prueba","otra opcion"]
+        return Constants.todasLasAcciones
     }
 
-/*     LinkedHashSet<Pedido> getPedidosEnProceso(Alumno alumno) {
+     LinkedHashSet<Pedido> getPedidosEnProceso(Alumno alumno) {
         return alumno.getPedidosEnProceso();
     }
 

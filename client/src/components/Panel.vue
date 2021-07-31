@@ -54,7 +54,9 @@
 </template>
 
 <script>
+import axios from "axios";
 import aux from '../consts'
+/* eslint-disable no-console */
 export default {
   name: 'Panel',
   data () {
@@ -63,53 +65,30 @@ export default {
       serverURL: process.env.VUE_APP_SERVER_URL,
       seleccionAccion: 0,
       actionsDoc : [
-      { 
-          value: 0, 
-          text: '-- Seleccione Accion --' 
-      },
-      {
-          value: 1, 
-          text: "Anunciar Examen"
-      },
-      {
-          value: 2, 
-          text: "Cambio de Aula"
-      },
-      {
-          value: 3, 
-          text: "Reservar Aula"
-      },
-      {
-          value: 4, 
-          text: "Armado de burbujas"
-      }],
+      { value: 0, text: '-- Seleccione Accion --'}],
       actionsAlum : [
-      { 
-          value: 0, 
-          text: '-- Seleccione Accion --' 
-      },
-      {
-          value: 1, 
-          text: "Sumarse a un curso"
-      },
-      {
-          value: 2, 
-          text: "Puntuar un curso"
-      },
-      {
-          value: 3, 
-          text: "Notificar sintomas"
-      }]
+      { value: 0, text: '-- Seleccione Accion --'}]
     }
   },
   created () {
-   
+    this.getAcciones();   
   },
   methods: {
-    getAcciones() {
-    fetch(`${this.serverURL}/alumno/acciones`)
-      .then(response => response.json())
-      .then(json => (this.serverInfo = json.data))    
+    getAcciones() {     
+      axios.get(`${this.serverURL}/application/acciones`).then(response => {
+          console.log(response.data)
+
+          response.data.accionesAlumno.forEach(element => {
+             this.actionsAlum.push(element)            
+          });
+
+          response.data.accionesDocente.forEach(element => {
+             this.actionsDoc.push(element)            
+          });
+
+        }).catch(error => {
+          console.log(error);
+        })
     }
   }
  

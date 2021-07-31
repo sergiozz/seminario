@@ -10,17 +10,15 @@ class AlumnoController {
 /*     def index() {
         def Alumno persona1 = new Alumno(nombre: "someone", apellido: "stuck")
         [alumno:persona1]
-    } */
+    } 
 
     def acciones() {        
         def materias = alumnoService.getCurrent()
-        respond (status: 200, data: materias)
+        respond materias
     }
 
 
-
-
-/*     def getMaterias(Integer alumnoId) {
+    def getMaterias(Integer alumnoId) {
         def alumno = Alumno.findById(alumnoId)
         def materias = alumnosService.obtenerMateriasCursadas(alumnoId)
         return [alumno: alumno, materias: materias]

@@ -81,7 +81,7 @@
 
 <script>
 import aux from '../consts'
-
+/* eslint-disable no-console */
 export default {
   name: 'principal',
   data () {
