@@ -1,9 +1,14 @@
 package ubicando
-class Horario {
 
+class Horario {
     Integer horaDesde
     Integer horaHasta
     String dia
+
+    static constraints = {
+        horaDesde nullable: false, min: 0, max: 23
+        horaHasta nullable: false, min: 0, max: 23
+    }
 
     int superposicion(Horario horario) {
         if (horario.dia == dia){
@@ -16,4 +21,5 @@ class Horario {
         }
         else return 0
     }
+
 }

@@ -9,6 +9,8 @@ class Curso {
     Integer numCurso
     boolean aceptaSuscripcion = true
     Aula aulaActual
+    HashMap<Alumno, Puntaje> puntajes = new HashMap<Alumno, Puntaje>()
+    BigDecimal calificacionMedia = 0
 
     static constraints = {
     }
@@ -25,5 +27,16 @@ class Curso {
             i++
         }
         return !superpuesto
+    }
+
+    boolean puedePuntuar(Alumno alumno){
+        return (!puntajes.containsKey(alumno))
+    }
+
+    void recibirPuntuacion(Puntaje puntaje){
+        if (puedePuntuar(puntaje.alumno)){
+            calificacionMedia = (calificacionMedia * puntajes.size() + puntaje.calificacion) / (puntajes.size() + 1)
+            puntajes.put(puntaje.alumno, puntaje)
+        }
     }
 }
