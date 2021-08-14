@@ -36,13 +36,13 @@
       </div>
 
       <div class="col-5">
-        <h3 v-if="$store.state.seleccionRol != consts.ROLSD">{{$store.state.seleccionRol}}</h3>
+        <h3 v-if="$store.state.seleccionRol != consts.ROL_NULL">{{$store.state.seleccionRol}}</h3>
 
-        <div v-if="$store.state.seleccionRol == consts.ROLDC">
+        <div v-if="$store.state.seleccionRol == consts.ROL_DC">
           <b-form-select v-model="seleccionAccion" :options="actionsDoc" class="m-2 roleselecion"/>
         </div>
 
-        <div v-if="$store.state.seleccionRol == consts.ROLAL">
+        <div v-if="$store.state.seleccionRol == consts.ROL_AL">
           <b-form-select v-model="seleccionAccion" :options="actionsAlum" class="m-2 roleselecion"/>
         </div>
 

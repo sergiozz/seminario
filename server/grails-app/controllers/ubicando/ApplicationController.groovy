@@ -16,4 +16,12 @@ class ApplicationController implements PluginManagerAware {
     def getAllActions() {
         respond Constants.todasLasAcciones
     }
+
+    def getAllUsers() {
+        respond Constants.todasLasAcciones
+    }
+
+    def createUser() {
+        respond Constants.todasLasAcciones
+    }
 }
