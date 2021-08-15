@@ -23,24 +23,25 @@ class ApplicationController implements PluginManagerAware {
 
     def private crearEstadoinicial(){
         if (alumnoService.count() == 0){
-            def alumno1 = new Alumno(nombre: "Roberto", apellido: "Lopez")
-            def alumno2 = new Alumno(nombre: "Lucas", apellido: "Gonzalez")
-            def alumno3 = new Alumno(nombre: "Marta", apellido: "Perez")
-            def alumno4 = new Alumno(nombre: "Paula", apellido: "Ortiz")
-            alumnoService.save(alumno1)
-            alumnoService.save(alumno2)
-            alumnoService.save(alumno3)
-            alumnoService.save(alumno4)
+            def mock_alumno1 = new Alumno(nombre: "Roberto", apellido: "Lopez")
+            def mock_alumno2 = new Alumno(nombre: "Lucas", apellido: "Gonzalez")
+            def mock_alumno3 = new Alumno(nombre: "Marta", apellido: "Perez")
+            def mock_alumno4 = new Alumno(nombre: "Paula", apellido: "Ortiz")
+            alumnoService.save(mock_alumno1)
+            alumnoService.save(mock_alumno2)
+            alumnoService.save(mock_alumno3)
+            alumnoService.save(mock_alumno4)
         }
 
         if (docenteService.count() == 0){
-            def docente1 = new Docente(nombre: "Julio", apellido: "Gomez")
-            def docente2 = new Docente(nombre: "Lucio", apellido: "Mendez")
-            def docente3 = new Docente(nombre: "Don Pedro", apellido: "Cruz")
-            docenteService.save(docente1)
-            docenteService.save(docente2)
-            docenteService.save(docente3)
+            def mock_docente1 = new Docente(nombre: "Julio", apellido: "Gomez")
+            def mock_docente2 = new Docente(nombre: "Lucio", apellido: "Mendez")
+            def mock_docente3 = new Docente(nombre: "Don Pedro", apellido: "Cruz")
+            docenteService.save(mock_docente1)
+            docenteService.save(mock_docente2)
+            docenteService.save(mock_docente3)
         }
+        return 
     }
 /* 
     def getAllUsers() {
