@@ -61,27 +61,19 @@
             <b-col md="2" style="margin-top: 10px;"><b-button  @click="confirmLogin" variant="secondary">Confirmar</b-button></b-col>
           </b-row>
           <b-row>            
-            <b-col md="2"><a href="#/maps" style="margin: 12px;"> <h3> Ver mapas</h3></a></b-col>
-            <b-col md="2"><a href="#/" style="margin: 12px;"> <h3> Acciones</h3></a></b-col>
+            <b-col md="2"><a href="#/maps" style="margin: 12px;"> <h3 class="buttonActions"> Ver mapas</h3></a></b-col>
+            <b-col md="2"><a href="#/" style="margin: 12px;"> <h3 class="buttonActions"> Acciones</h3></a></b-col>
             <b-col md="8"></b-col>
           </b-row>
         </b-container>
 
         <router-view />
-       
-        <div id="controllers" role="navigation"> <br> <br>
-          <h4>Available Controllers from server:</h4>
-          <ul v-if="serverInfo && serverInfo.controllers">
-            <li v-for="controller in serverInfo.controllers" :key="controller.name">
-              <a :href="serverURL + '/' + controller.logicalPropertyName">{{controller.name }}</a></li>
-          </ul>
-        </div>
 
       </section>
     </div>
 
 
-    <div class="footer row" role="contentinfo">
+    <div class="footer row" role="contentinfo" style="padding-top: 200px;">
     </div>
 
   </div>
@@ -196,6 +188,11 @@ export default {
     color: blue;
     border-radius: 2.25rem;
     background: #e7e7e7;
+  }
+
+  .buttonActions {
+    border-style: solid;
+    text-align: center;
   }
   
   .footer {

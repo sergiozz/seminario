@@ -43,15 +43,4 @@ class ApplicationController implements PluginManagerAware {
         }
         return 
     }
-/* 
-    def getAllUsers() {
-        params.max = Math.min(max ?: 10, 100)
-        
-        def alumnosEncontrados = alumnoService.list(params), model:[alumnoCount: alumnoService.count()]
-        def docentesEncontrados = docenteService.list(params), model:[docenteCount: docenteService.count()]
-        respond [ 
-            docentes: docentesEncontrados,
-            alumnos: alumnosEncontrados
-        ]
-    } */
 }

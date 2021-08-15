@@ -14,7 +14,6 @@ class UrlMappings {
         "/alumno/getAll"(controller: 'alumno', action:'getAll')
         "/docente/getAll"(controller: 'docente', action:'getAll')
         "/application/acciones"(controller: 'application', action:'getAllActions')
-        //"/application/getAllUsers"(controller: 'application', action:'getAllUsers')
 
         "500"(view: '/error')
         "404"(view: '/notFound')
