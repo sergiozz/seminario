@@ -52,11 +52,20 @@
       <section class="row colset-2-its" style=" max-width: none;">
         <h1 class="logot">Ubicando</h1> 
 
-        <div>
-          <b-form-select v-model="$store.state.seleccionRol" :options="consts.ROLES" class="m-2 roleselecion"/>
-        </div>
-        <a href="#/maps" style="margin: 12px;"> <h3> Ver mapas</h3></a>    
-        <a href="#/" style="margin: 12px;"> <h3> Acciones</h3></a>
+        <br><br>
+        <b-container class="bv-example-row">
+          <b-row class="loginTable">
+            <b-col md="2" style="margin-top: 10px;"> <h3>Falso Login</h3></b-col>
+            <b-col md="4"><b-form-select v-model="$store.state.seleccionRol" :options="consts.ROLES" @change="changeRol" class="m-2 roleselecion"/></b-col>
+            <b-col md="4"><b-form-select v-model="$store.state.seleccionUser" :options="users" class="m-2 roleselecion"/></b-col>
+            <b-col md="2" style="margin-top: 10px;"><b-button  @click="confirmLogin" variant="secondary">Confirmar</b-button></b-col>
+          </b-row>
+          <b-row>            
+            <b-col md="2"><a href="#/maps" style="margin: 12px;"> <h3> Ver mapas</h3></a></b-col>
+            <b-col md="2"><a href="#/" style="margin: 12px;"> <h3> Acciones</h3></a></b-col>
+            <b-col md="8"></b-col>
+          </b-row>
+        </b-container>
 
         <router-view />
        
@@ -72,7 +81,6 @@
     </div>
 
 
-
     <div class="footer row" role="contentinfo">
     </div>
 
@@ -81,24 +89,60 @@
 
 <script>
 import aux from '../consts'
+import axios from "axios"
 /* eslint-disable no-console */
 export default {
   name: 'principal',
   data () {
     return {
-      msg: 'Welcome to Your Grails & Vue.js App',
       serverInfo: null,
-      showLinks: false,
       serverURL: process.env.VUE_APP_SERVER_URL,
-      roles: [],
+      users: aux.USERS,
       consts: aux
     }
   },
   created () {
     fetch(`${this.serverURL}/application`)
       .then(response => response.json())
-      .then(json => (this.serverInfo = json))
-    
+      .then(json => (this.serverInfo = json))    
+  },
+  methods: {
+    changeRol() {
+      this.users = this.consts.USERS.slice();
+      this.$store.state.seleccionUser = this.consts.SIN_SELECCION;
+
+      if (this.$store.state.seleccionRol == this.consts.ROL_AL)
+        axios.get(`${this.serverURL}/alumno/getAll`).then(response => {
+            response.data.forEach(element => {
+             let elem = {
+                value: element.id, 
+                text: element.nombre + ' ' + element.apellido
+             }
+             this.users.push(elem)            
+            });
+          }).catch(error => {
+            console.log(error);
+          })
+
+      if (this.$store.state.seleccionRol == this.consts.ROL_DC)
+        axios.get(`${this.serverURL}/docente/getAll`).then(response => {
+            response.data.forEach(element => {
+             let elem = {
+                value: element.id, 
+                text: element.nombre + ' ' + element.apellido
+             }
+             this.users.push(elem)            
+            });
+          }).catch(error => {
+            console.log(error);
+          })
+    },
+    confirmLogin() {
+      if (this.$store.state.seleccionUser != this.consts.SIN_SELECCION){
+        this.$store.state.userLogin = this.$store.state.seleccionUser;
+        console.log("new login")
+      }
+    }
   }
 }
 </script>
@@ -140,6 +184,11 @@ export default {
     font-family: "Great Vibes", cursive; 
     font-size: 56px !important;
     text-shadow: 0 1px 1px #fff; 
+  }
+
+  .loginTable{
+    border: dashed;
+    background-color: aliceblue;
   }
 
   .roleselecion {

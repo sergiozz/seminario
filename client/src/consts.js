@@ -5,6 +5,8 @@ const ROL_ND = "Rol No docente";
 const ROL_MDD = "Rol Miembro de Departamento";
 const ROL_ADMIN = "Rol Administrador";
 
+const SIN_SELECCION = "--Sin seleccion--";
+
 export default { 
     ROL_NULL: ROL_NULL,    
     ROL_DC: ROL_DC,    
@@ -12,6 +14,8 @@ export default {
     ROL_ND: ROL_ND,    
     ROL_MDD: ROL_MDD,    
     ROL_ADMIN: ROL_ADMIN,
+
+    SIN_SELECCION: SIN_SELECCION,
         
     ROLES: [
     { 
@@ -37,6 +41,12 @@ export default {
     {
         value: ROL_ADMIN, 
         text: ROL_ADMIN
-    }]
+    }],
+
+    USERS: [
+        { 
+            value: SIN_SELECCION, 
+            text: SIN_SELECCION 
+        }]
   }
   

@@ -4,6 +4,7 @@ class Docente {
 
     String nombre
     String apellido
+    static final rol = Constants.ROL_DOCENTE;
     ArrayList<Curso> titularDeCursos = new ArrayList<Curso>()
 
     static constraints = {

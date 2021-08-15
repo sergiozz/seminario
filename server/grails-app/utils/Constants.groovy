@@ -2,6 +2,9 @@ package ubicando
 
 public class Constants {
 
+    def static final Integer MAXSUSCRIPCIONES = 10
+    def static final Integer MIN_DIAS_PARA_PUNTUAR = 14
+
     def static final ROL_DOCENTE = "Rol Docente";
     def static final ROL_ALUMNO = "Rol Alumno";
     def static final ROL_NO_DOCENTE = "Rol No docente";

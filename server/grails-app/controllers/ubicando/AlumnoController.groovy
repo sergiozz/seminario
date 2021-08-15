@@ -7,6 +7,15 @@ class AlumnoController {
 
 	def alumnoService
 
+/*     def save(Alumno alumno) {
+        alumnoService.save(alumno)
+    } */
+
+    def getAll(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond alumnoService.list(params), model:[alumnoCount: alumnoService.count()]
+    }
+
 /*     def index() {
         def Alumno persona1 = new Alumno(nombre: "someone", apellido: "stuck")
         [alumno:persona1]

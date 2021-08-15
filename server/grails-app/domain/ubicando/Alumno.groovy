@@ -1,16 +1,15 @@
 package ubicando
 
 import java.time.LocalDateTime
+import static Constants.*
 
 class Alumno {
 
     String nombre
     String apellido
+    static final rol = Constants.ROL_ALUMNO;
     HashMap<Curso, LocalDateTime> cursosSuscriptos = new HashMap<Curso, LocalDateTime>()
     ArrayList<Puntaje> puntajes = new ArrayList<Puntaje>()
-
-    final Integer MAXSUSCRIPCIONES = 10
-    final Integer MIN_DIAS_PARA_PUNTUAR = 14
 
     static constraints = {
     }
@@ -20,13 +19,13 @@ class Alumno {
     }
 
     void suscribirseACurso(Curso curso){
-        if (!suscriptoACurso(curso) && cursosSuscriptos.size() + 1 <= MAXSUSCRIPCIONES && curso.getAceptaSuscripcion()){
+        if (!suscriptoACurso(curso) && cursosSuscriptos.size() + 1 <= Constants.MAXSUSCRIPCIONES && curso.getAceptaSuscripcion()){
             cursosSuscriptos.put(curso, LocalDateTime.now())
         }
     }
 
     private boolean puedePuntuarCurso (Curso curso, LocalDateTime dia){
-        return (suscriptoACurso(curso) && cursosSuscriptos.get(curso).isBefore(dia.minusDays(MIN_DIAS_PARA_PUNTUAR)))
+        return (suscriptoACurso(curso) && cursosSuscriptos.get(curso).isBefore(dia.minusDays(Constants.MIN_DIAS_PARA_PUNTUAR)))
     }
 
     void puntuarCurso (Curso curso, Integer calificacion, String comentario){
