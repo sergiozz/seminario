@@ -5,7 +5,7 @@ class Curso {
     ArrayList<Horario> horarios
     Docente docenteTitular
     String codMateria
-    String materia
+    Materia materia
     Integer numCurso
     boolean aceptaSuscripcion = true
     Aula aulaActual

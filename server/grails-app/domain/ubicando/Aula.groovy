@@ -6,8 +6,10 @@ class Aula {
 
     String numero
     Integer piso
+    Integer capacidad
     ArrayList<Curso> cursos = new ArrayList<Curso>()
     ArrayList<Examen> examenes = new ArrayList<Examen>()
+    boolean  pendienteDesinfeccion = false
 
     static constraints = {
     }
@@ -29,11 +31,23 @@ class Aula {
         }
     }
 
-    boolean  puedeAgregarExamen(LocalDateTime fecha, Examen examen){
-        //TODO
+
+
+    boolean disponibleParaExamen(Integer cantidadAlumnos, LocalDateTime horaInicio, LocalDateTime horaFin) {
+        if (cantidadAlumnos <= capacidad && !pendienteDesinfeccion){
+            return this.horarioDisponible(horaInicio, horaFin)
+        }
     }
 
-    void agregarExamen(LocalDateTime fecha, Examen examen){
+    void reservarParaExamen(Examen examen) {
+        if (this.disponibleParaExamen(examen.cantidadAlumnos, examen.horaInicio, examen.horaFin)){
+            this.examenes.add(examen)
+            examen.asignarAula(this)
+        }
+    }
+
+    boolean horarioDisponible(LocalDateTime localDateTime1, LocalDateTime localDateTime2) {
         //TODO
+        return true
     }
 }

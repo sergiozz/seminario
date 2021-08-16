@@ -1,5 +1,7 @@
 package ubicando
 
+import java.time.LocalDateTime
+
 class Docente {
 
     String nombre
@@ -14,6 +16,14 @@ class Docente {
         if (titularDeCursos.contains(curso) && aulaNueva.puedeAgregarCurso(curso)){
             curso.getAulaActual().getCursos().remove(curso)
             aulaNueva.agregarCurso(curso)
+        }
+    }
+
+    void reservarAulaParaExamen(Curso curso, Aula aula, Integer cantidadAlumnos, LocalDateTime horaInicio, LocalDateTime horaFin){
+        if(aula.disponibleParaExamen(cantidadAlumnos, horaInicio, horaFin)){
+            Examen examen = new Examen(horaInicio: horaInicio, horaFin: horaFin, materia: curso.getcodMateria(), cantidadAlumnos: cantidadAlumnos)
+            aula.reservarParaExamen(examen, curso)
+            examen.getCursos().add(curso)
         }
     }
 }
