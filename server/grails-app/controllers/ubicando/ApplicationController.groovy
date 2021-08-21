@@ -11,6 +11,7 @@ class ApplicationController implements PluginManagerAware {
 
     AlumnoService alumnoService
     DocenteService docenteService
+    CursoService cursoService
 
     def index() {
         crearEstadoinicial();
@@ -18,10 +19,19 @@ class ApplicationController implements PluginManagerAware {
     }
 
     def getAllActions() {
-        respond Constants.todasLasAcciones
+        respond Constants.TODAS_LAS_ACCIONES
+    }
+    
+    def getAllMaterias() {
+        respond Constants.TODAS_LAS_MATERIAS
     }
 
     def private crearEstadoinicial(){
+        def mock_docente1
+        def mock_docente2
+        def mock_docente3
+        def mock_docente4
+
         if (alumnoService.count() == 0){
             def mock_alumno1 = new Alumno(nombre: "Roberto", apellido: "Lopez")
             def mock_alumno2 = new Alumno(nombre: "Lucas", apellido: "Gonzalez")
@@ -34,13 +44,27 @@ class ApplicationController implements PluginManagerAware {
         }
 
         if (docenteService.count() == 0){
-            def mock_docente1 = new Docente(nombre: "Julio", apellido: "Gomez")
-            def mock_docente2 = new Docente(nombre: "Lucio", apellido: "Mendez")
-            def mock_docente3 = new Docente(nombre: "Don Pedro", apellido: "Cruz")
+            mock_docente1 = new Docente(nombre: "Julio", apellido: "Gomez")
+            mock_docente2 = new Docente(nombre: "Lucio", apellido: "Mendez")
+            mock_docente3 = new Docente(nombre: "Don Pedro", apellido: "Cruz")
+            mock_docente4 = new Docente(nombre: "Luis", apellido: "Peralta")
             docenteService.save(mock_docente1)
             docenteService.save(mock_docente2)
             docenteService.save(mock_docente3)
+            docenteService.save(mock_docente4)
         }
+
+        if (cursoService.count() == 0){
+            def mock_curso1 = new Curso(codMateria: 9268, docenteTitular: mock_docente1, numCurso: 1)
+            def mock_curso2 = new Curso(codMateria: 6147, docenteTitular: mock_docente2, numCurso: 1)
+            def mock_curso3 = new Curso(codMateria: 7085, docenteTitular: mock_docente3, numCurso: 1)
+            def mock_curso4 = new Curso(codMateria: 9268, docenteTitular: mock_docente4, numCurso: 2)
+            cursoService.save(mock_curso1)
+            cursoService.save(mock_curso2)
+            cursoService.save(mock_curso3)
+            cursoService.save(mock_curso4)
+        }
+
         return 
     }
 }

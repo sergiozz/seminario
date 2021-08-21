@@ -7,7 +7,6 @@ class Alumno {
 
     String nombre
     String apellido
-    static final rol = Constants.ROL_ALUMNO;
     HashMap<Curso, LocalDateTime> cursosSuscriptos = new HashMap<Curso, LocalDateTime>()
     ArrayList<Puntaje> puntajes = new ArrayList<Puntaje>()
 

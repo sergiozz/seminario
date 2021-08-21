@@ -107,7 +107,7 @@ export default {
         axios.get(`${this.serverURL}/alumno/getAll`).then(response => {
             response.data.forEach(element => {
              let elem = {
-                value: element.id, 
+                value: element, 
                 text: element.nombre + ' ' + element.apellido
              }
              this.users.push(elem)            
@@ -120,7 +120,7 @@ export default {
         axios.get(`${this.serverURL}/docente/getAll`).then(response => {
             response.data.forEach(element => {
              let elem = {
-                value: element.id, 
+                value: element, 
                 text: element.nombre + ' ' + element.apellido
              }
              this.users.push(elem)            
@@ -132,6 +132,7 @@ export default {
     confirmLogin() {
       if (this.$store.state.seleccionUser != this.consts.SIN_SELECCION){
         this.$store.state.userLogin = this.$store.state.seleccionUser;
+        this.$store.state.rolUserLogin = this.$store.state.seleccionRol;
         console.log("new login")
       }
     }

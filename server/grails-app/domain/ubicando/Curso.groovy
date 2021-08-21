@@ -4,8 +4,9 @@ class Curso {
 
     ArrayList<Horario> horarios
     Docente docenteTitular
+    //static hasOne = [docenteTitular: Docente]
     String codMateria
-    Materia materia
+    //Materia materia
     Integer numCurso
     boolean aceptaSuscripcion = true
     Aula aulaActual
@@ -13,6 +14,7 @@ class Curso {
     BigDecimal calificacionMedia = 0
 
     static constraints = {
+        aulaActual nullable: true
     }
 
     boolean superpuesto(Curso otroCurso) {

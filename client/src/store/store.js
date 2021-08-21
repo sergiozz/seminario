@@ -8,6 +8,7 @@ export let store = new Vuex.Store({
   state: {
     seleccionRol: aux.ROL_NULL,
     seleccionUser: aux.SIN_SELECCION,
-    userLogin: {}
+    userLogin: {},
+    rolUserLogin: aux.ROL_NULL
   }
 });

@@ -47,12 +47,21 @@ public class Constants {
         [ value: 503, text: 'Peticion para desinfeccion de Aula']
     ]
 
-    def static final todasLasAcciones = [ 
+    def static final TODAS_LAS_ACCIONES = [ 
         accionesDocente: ACCIONES_DOCENTE, 
         accionesNoDocente: ACCIONES_NO_DOCENTE, 
         accionesMiembroDeDepartamento: ACCIONES_MIEMBRO_DEPARTAMENTO, 
         accionesAdministrador: ACCIONES_ADMIN, 
         accionesAlumno: ACCIONES_ALUMNO 
+    ]
+
+    def static final TODAS_LAS_MATERIAS = [ 
+        [ value: 6147, text: 'Álgebra'],
+        [ value: 9056, text: 'Simulación'],
+        [ value: 9044, text: 'Organización de computadoras'],
+        [ value: 9268, text: 'Base de datos'],
+        [ value: 6235, text: 'Análisis númerico'],
+        [ value: 7085, text: 'Física II']
     ]
 
 }
