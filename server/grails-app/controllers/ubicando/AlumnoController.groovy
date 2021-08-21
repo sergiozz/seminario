@@ -16,6 +16,13 @@ class AlumnoController {
         respond alumnoService.list(params), model:[alumnoCount: alumnoService.count()]
     }
 
+    def suscribirCurso(Integer idAlumno, Integer idCurso) {
+        respond alumnoService.suscribirCurso(idAlumno, idCurso)
+        //if (respuesta != "OK") respond [[ status: 400, mensaje: respuesta]]
+        //respond {[ status: 200, mensaje:"OK"]} 
+       
+    }
+
 /*     def index() {
         def Alumno persona1 = new Alumno(nombre: "someone", apellido: "stuck")
         [alumno:persona1]

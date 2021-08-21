@@ -17,10 +17,13 @@ class Alumno {
         return cursosSuscriptos.containsKey(curso)
     }
 
-    void suscribirseACurso(Curso curso){
-        if (!suscriptoACurso(curso) && cursosSuscriptos.size() + 1 <= Constants.MAXSUSCRIPCIONES && curso.getAceptaSuscripcion()){
-            cursosSuscriptos.put(curso, LocalDateTime.now())
-        }
+    String suscribirseACurso(Curso curso){
+        if (suscriptoACurso(curso)) return "Error: Ya se encuentra suscripto el alumno al curso"
+        if (cursosSuscriptos.size() + 1 >= Constants.MAXSUSCRIPCIONES ) return "Error: El curso se encuentra lleno"
+        if (!curso.getAceptaSuscripcion()) return "Error: El curso no acepta nuevas suscripciones"
+        
+        cursosSuscriptos.put(curso, LocalDateTime.now())
+        return "OK"
     }
 
     private boolean puedePuntuarCurso (Curso curso, LocalDateTime dia){

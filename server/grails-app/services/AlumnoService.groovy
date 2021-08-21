@@ -22,6 +22,13 @@ abstract class AlumnoService {
     @Transactional
     protected abstract Alumno save(Alumno alumno)
 
+    def suscribirCurso(Integer idAlumno, Integer idCurso){
+      def alumno = Alumno.findById(idAlumno)
+      def curso = Curso.findById(idCurso)
+
+      return alumno.suscribirseACurso(curso)
+    }
+
     
 /*
 	ArrayList getCurrent() {

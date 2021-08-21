@@ -131,7 +131,7 @@ export default {
             //console.log(elemJson.docenteTitular)
             let elem = {
                 value: element, 
-                text: 'Curso ' + element.numCurso //+ element.docenteTitular.id
+                text: element.numCurso + ' ' + element.descripcion
              }
              this.cursosList.push(elem)            
           });
@@ -141,6 +141,20 @@ export default {
     },
 
     confirmAction(){
+/*        let request = { 
+            idAlumno: this.$store.state.userLogin.id, 
+            idCurso: this.seleccionCurso.id
+          } 
+          console.log(request)  */
+        axios.get(`${this.serverURL}/alumno/suscribirCurso/${this.$store.state.userLogin.id}/${this.seleccionCurso.id}`).then(response => {
+          console.log(response.data)
+          response.data.forEach(element => {
+            console.log(element)
+             //this.materiasList.push(element)            
+          });
+        }).catch(error => {
+          console.log(error);
+        })
     },
 
     consultaCursos(){

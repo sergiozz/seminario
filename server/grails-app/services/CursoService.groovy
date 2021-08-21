@@ -24,7 +24,7 @@ abstract class CursoService {
 
     @Transactional
     def getCursosPorCodigo(Integer codMateria) {
-		return Curso.findAllByCodMateria(codMateria)
-	}
+		  return Curso.findAllByCodMateria(codMateria)
+	  }
 
 }

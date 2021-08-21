@@ -55,10 +55,10 @@ class ApplicationController implements PluginManagerAware {
         }
 
         if (cursoService.count() == 0){
-            def mock_curso1 = new Curso(codMateria: 9268, docenteTitular: mock_docente1, numCurso: 1)
-            def mock_curso2 = new Curso(codMateria: 6147, docenteTitular: mock_docente2, numCurso: 1)
-            def mock_curso3 = new Curso(codMateria: 7085, docenteTitular: mock_docente3, numCurso: 1)
-            def mock_curso4 = new Curso(codMateria: 9268, docenteTitular: mock_docente4, numCurso: 2)
+            def mock_curso1 = new Curso(codMateria: 9268, docenteTitular: mock_docente1, numCurso: 1, descripcion: "Curso Gomez")
+            def mock_curso2 = new Curso(codMateria: 6147, docenteTitular: mock_docente2, numCurso: 1, descripcion: "Curso Mendez")
+            def mock_curso3 = new Curso(codMateria: 7085, docenteTitular: mock_docente3, numCurso: 1, descripcion: "Curso Cruz")
+            def mock_curso4 = new Curso(codMateria: 9268, docenteTitular: mock_docente4, numCurso: 2, descripcion: "Curso Peralta")
             cursoService.save(mock_curso1)
             cursoService.save(mock_curso2)
             cursoService.save(mock_curso3)
