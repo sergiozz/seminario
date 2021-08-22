@@ -55,6 +55,8 @@
             <h4>Curso</h4>
             <b-form-select v-model="seleccionCurso" :options="cursosList" class="m-2 wid80 roleselecion"/>
           </div>
+          <p v-if="responseMsj" style="background: aquamarine;">{{responseMsj}}</p>
+          <p v-if="responseError" style="background: crimson;">{{responseError}}</p>
         </div>
 
         <br>
@@ -87,6 +89,8 @@ export default {
       { value: 0, text: aux.SIN_SELECCION}],
       seleccionMateria: 0,
       seleccionCurso: 0,
+      responseMsj: '',
+      responseError: ''
     }
   },
   created () {
@@ -148,10 +152,14 @@ export default {
           console.log(request)  */
         axios.get(`${this.serverURL}/alumno/suscribirCurso/${this.$store.state.userLogin.id}/${this.seleccionCurso.id}`).then(response => {
           console.log(response.data)
-          response.data.forEach(element => {
-            console.log(element)
+         // response.data.forEach(element => {
+         //   console.log(element)
              //this.materiasList.push(element)            
-          });
+         // });
+         if (response.data.status == 200)
+            this.responseMsj = response.data.mensaje
+          else
+            this.responseError = response.data.mensaje
         }).catch(error => {
           console.log(error);
         })
