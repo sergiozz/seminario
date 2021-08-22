@@ -7,6 +7,7 @@ class Docente {
     String nombre
     String apellido
     ArrayList<Curso> titularDeCursos = new ArrayList<Curso>()
+    ArrayList<SolicitudIntercambio> solicitudIntercambios = new ArrayList<SolicitudIntercambio>()
 
     static constraints = {
     }
@@ -17,6 +18,19 @@ class Docente {
             aulaNueva.agregarCurso(curso)
         }
     }
+
+    void solicitarIntercambio(Curso curso){
+        curso.getDocenteTitular().getSolicitudIntercambios().add(new SolicitudIntercambio())
+    }
+
+    void aceptarSolicitudIntercambio(SolicitudIntercambio solicitud){
+        solicitud.aceptarIntercambio(this)
+    }
+
+    void rechazrSolicitudIntercambio(SolicitudIntercambio solicitud){
+        solicitud.rechazarIntercambio(this)
+    }
+
 
     void reservarAulaParaExamen(Curso curso, Aula aula, Integer cantidadAlumnos, LocalDateTime horaInicio, LocalDateTime horaFin){
         if(aula.disponibleParaExamen(cantidadAlumnos, horaInicio, horaFin)){

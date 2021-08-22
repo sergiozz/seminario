@@ -23,6 +23,10 @@ class AlumnoController {
        
     }
 
+    def puntuarCurso(Integer idAlumno, Integer idCurso, Integer calificacion, String comentario){
+        respond alumnoService.puntuarCurso(idAlumno, idCurso)
+    }
+
 /*     def index() {
         def Alumno persona1 = new Alumno(nombre: "someone", apellido: "stuck")
         [alumno:persona1]

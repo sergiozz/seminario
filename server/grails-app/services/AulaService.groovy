@@ -6,7 +6,7 @@ import grails.gorm.transactions.Transactional
 
 @Service(Docente)
 @Transactional
-abstract class DocenteService {
+abstract class AulaService {
 
     protected abstract Docente get(Serializable id)
 
@@ -18,12 +18,11 @@ abstract class DocenteService {
 
     protected abstract Docente save(Docente docente)
 
-    def solicitarCambioDeAula(Integer idDocente, Integer idCurso, Integer idAula){
+    def obtenerAulasDisponibles(Integer idCurso, Integer capacidad){
 
-        Docente docente = Docente.findById(idDocente)
-        Curso curso = Curso.findById(idCurso)
-        Aula aula = Aula.findById(idAula)
-        return docente.cambiarAulaDeCurso(curso, aula)
+        Curso curso = Curso.FindById(idCurso)
+        //TODO probar en vista para seleccionar aula para el cambio de curso
+        return Aula.findAllByCapacidadGreaterThanEquals(capacidad).findAll {aulaCandidata -> aulaCandidata.puedeAgregarCurso(curso)}
     }
 
 }
