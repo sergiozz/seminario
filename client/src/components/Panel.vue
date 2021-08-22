@@ -154,24 +154,33 @@ export default {
     },
 
     confirmAction(){
-/*        let request = { 
+       switch (this.seleccionAccion) {
+        //Sumarse a un curso
+        case this.actionsAlum[1].value:
+         /*        let request = { 
             idAlumno: this.$store.state.userLogin.id, 
             idCurso: this.seleccionCurso.id
           } 
           console.log(request)  */
-        axios.get(`${this.serverURL}/alumno/suscribirCurso/${this.$store.state.userLogin.id}/${this.seleccionCurso.id}`).then(response => {
-          console.log(response.data)
-         // response.data.forEach(element => {
-         //   console.log(element)
-             //this.materiasList.push(element)            
-         // });
-         if (response.data.status == 200)
-            this.responseMsj = response.data.mensaje
-          else
-            this.responseError = response.data.mensaje
-        }).catch(error => {
-          console.log(error);
-        })
+          axios.get(`${this.serverURL}/alumno/suscribirCurso/${this.$store.state.userLogin.id}/${this.seleccionCurso.id}`).then(response => {
+            console.log(response.data)
+          // response.data.forEach(element => {
+          //   console.log(element)
+              //this.materiasList.push(element)            
+          // });
+          if (response.data.status == 200)
+              this.responseMsj = response.data.mensaje
+            else
+              this.responseError = response.data.mensaje
+          }).catch(error => {
+            console.log(error);
+          })
+          break;
+      
+        default:
+          break;
+      }
+
     },
 
     consultaCursos(){
