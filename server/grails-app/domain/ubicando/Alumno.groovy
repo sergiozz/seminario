@@ -22,8 +22,10 @@ class Alumno {
         if (cursosSuscriptos.size() + 1 >= Constants.MAXSUSCRIPCIONES ) return "Error: El curso se encuentra lleno"
         if (!curso.getAceptaSuscripcion()) return "Error: El curso no acepta nuevas suscripciones"
         
+        //println "ook"
+        println cursosSuscriptos
         cursosSuscriptos.put(curso, LocalDateTime.now())
-        return "OK"
+        return "El alumno fue suscripto al curso exitosamente"
     }
 
     private boolean puedePuntuarCurso (Curso curso, LocalDateTime dia){

@@ -54,6 +54,7 @@
             <b-form-select v-model="seleccionMateria" :options="materiasList" @change="changeMateria" class="m-2 wid80 roleselecion"/>
             <h4>Curso</h4>
             <b-form-select v-model="seleccionCurso" :options="cursosList" class="m-2 wid80 roleselecion"/>
+            <div v-if="cursosInscriptosList.length != 0">{{cursosInscriptosList}}</div>
           </div>
           <p v-if="responseMsj" style="background: aquamarine;">{{responseMsj}}</p>
           <p v-if="responseError" style="background: crimson;">{{responseError}}</p>
@@ -90,7 +91,8 @@ export default {
       seleccionMateria: 0,
       seleccionCurso: 0,
       responseMsj: '',
-      responseError: ''
+      responseError: '',
+      cursosInscriptosList: []
     }
   },
   created () {
@@ -114,11 +116,18 @@ export default {
         })
     },
     changeAction(){
+      this.responseMsj= '';
+      this.responseError= '';
       switch (this.seleccionAccion) {
         //Sumarse a un curso
         case this.actionsAlum[1].value:
           console.log('Sumarse a un curso');
           this.consultaCursos();
+          break;
+        //Consultar cursos inscriptos
+        case this.actionsAlum[4].value:
+          console.log('Consultar cursos inscriptos');
+          this.consultaCursosInscriptos();
           break;
       
         default:
@@ -176,6 +185,18 @@ export default {
           console.log(error);
         })
       }
+    },
+
+    consultaCursosInscriptos(){
+       axios.get(`${this.serverURL}/alumno/getAllCursosInscriptos/${this.$store.state.userLogin.id}`).then(response => {
+          console.log(response.data)
+          response.data.forEach(element => {
+             this.cursosInscriptosList.push(element)            
+          });
+        }).catch(error => {
+          console.log(error);
+        })
+     
     }
 
   } 
