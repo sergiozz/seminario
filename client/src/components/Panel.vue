@@ -54,6 +54,7 @@
             <b-form-select v-model="seleccionMateria" :options="materiasList" @change="changeMateria" class="m-2 wid80 roleselecion"/>
             <h4>Curso</h4>
             <b-form-select v-model="seleccionCurso" :options="cursosList" class="m-2 wid80 roleselecion"/>
+            <div v-if="cursosInscriptosList.length != 0">{{cursosInscriptosList}}</div>
           </div>
           <p v-if="responseMsj" style="background: aquamarine;">{{responseMsj}}</p>
           <p v-if="responseError" style="background: crimson;">{{responseError}}</p>
@@ -90,7 +91,8 @@ export default {
       seleccionMateria: 0,
       seleccionCurso: 0,
       responseMsj: '',
-      responseError: ''
+      responseError: '',
+      cursosInscriptosList: []
     }
   },
   created () {
@@ -114,11 +116,18 @@ export default {
         })
     },
     changeAction(){
+      this.responseMsj= '';
+      this.responseError= '';
       switch (this.seleccionAccion) {
         //Sumarse a un curso
         case this.actionsAlum[1].value:
           console.log('Sumarse a un curso');
           this.consultaCursos();
+          break;
+        //Consultar cursos inscriptos
+        case this.actionsAlum[4].value:
+          console.log('Consultar cursos inscriptos');
+          this.consultaCursosInscriptos();
           break;
       
         default:
@@ -145,24 +154,33 @@ export default {
     },
 
     confirmAction(){
-/*        let request = { 
+       switch (this.seleccionAccion) {
+        //Sumarse a un curso
+        case this.actionsAlum[1].value:
+         /*        let request = { 
             idAlumno: this.$store.state.userLogin.id, 
             idCurso: this.seleccionCurso.id
           } 
           console.log(request)  */
-        axios.get(`${this.serverURL}/alumno/suscribirCurso/${this.$store.state.userLogin.id}/${this.seleccionCurso.id}`).then(response => {
-          console.log(response.data)
-         // response.data.forEach(element => {
-         //   console.log(element)
-             //this.materiasList.push(element)            
-         // });
-         if (response.data.status == 200)
-            this.responseMsj = response.data.mensaje
-          else
-            this.responseError = response.data.mensaje
-        }).catch(error => {
-          console.log(error);
-        })
+          axios.get(`${this.serverURL}/alumno/suscribirCurso/${this.$store.state.userLogin.id}/${this.seleccionCurso.id}`).then(response => {
+            console.log(response.data)
+          // response.data.forEach(element => {
+          //   console.log(element)
+              //this.materiasList.push(element)            
+          // });
+          if (response.data.status == 200)
+              this.responseMsj = response.data.mensaje
+            else
+              this.responseError = response.data.mensaje
+          }).catch(error => {
+            console.log(error);
+          })
+          break;
+      
+        default:
+          break;
+      }
+
     },
 
     consultaCursos(){
@@ -176,6 +194,18 @@ export default {
           console.log(error);
         })
       }
+    },
+
+    consultaCursosInscriptos(){
+       axios.get(`${this.serverURL}/alumno/getAllCursosInscriptos/${this.$store.state.userLogin.id}`).then(response => {
+          console.log(response.data)
+          response.data.forEach(element => {
+             this.cursosInscriptosList.push(element)            
+          });
+        }).catch(error => {
+          console.log(error);
+        })
+     
     }
 
   } 

@@ -18,11 +18,15 @@ abstract class AlumnoService {
 
     protected abstract Alumno save(Alumno alumno)
 
-    def suscribirCurso(Integer idAlumno, Integer idCurso){
+    def String suscribirCurso(Integer idAlumno, Integer idCurso){
         Alumno alumno = Alumno.findById(idAlumno)
         Curso curso = Curso.findById(idCurso)
 
-      return alumno.suscribirseACurso(curso)
+        def respuesta = alumno.suscribirseACurso(curso)
+        //Es necesario?
+        //if (!respuesta.contains("Error")) save(alumno)
+
+        return respuesta
     }
 
     def puntuarCurso(Integer idAlumno, Integer idCurso, Integer calificacion, String comentario){
