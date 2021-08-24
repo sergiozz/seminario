@@ -30,7 +30,7 @@ class AulaSpec extends Specification implements DomainUnitTest<Aula> {
     }
 
     void "en un aula no puedo cargar un curso en un horario que existe otro curso"() {
-        given: "un aula vacia con un curso"
+        given: "un aula con un curso"
         Aula aula1 = new Aula(numero: 100, piso:1)
         def horariosCurso = new ArrayList<Horario>()
         def horario1 = new Horario(dia: "Lunes", horaDesde: 10, horaHasta: 14)
@@ -49,8 +49,9 @@ class AulaSpec extends Specification implements DomainUnitTest<Aula> {
         Curso curso2 = new Curso(horarios: horariosCurso2)
         aula1.agregarCurso(curso2)
 
-        then:"se pudo agregar el curso"
+        then:"no se pudo agregar el curso"
         aula1.cursos.size() == 1
         aula1.cursos.get(0) == curso
     }
+
 }

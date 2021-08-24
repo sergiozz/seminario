@@ -1,19 +1,18 @@
 package ubicando
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 class Examen {
 
-    LocalDateTime horaInicio
-    LocalDateTime horaFin
+    LocalDate diaExamen
+    Horario horario
     Integer cantidadAlumnos
     String codMateria
     ArrayList<Curso> cursos = new ArrayList<Curso>()
     ArrayList<Aula> aulas = new ArrayList<Aula>()
 
     static constraints = {
-        horaInicio nullable: false, blank: false
-        horaFin nullable: false, blank: false
     }
 
 

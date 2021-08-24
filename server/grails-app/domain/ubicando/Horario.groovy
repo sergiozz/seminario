@@ -10,16 +10,16 @@ class Horario {
         horaHasta nullable: false, min: 0, max: 23
     }
 
-    int superposicion(Horario horario) {
+    boolean superposicion(Horario horario) {
         if (horario.dia == dia){
             if(horario.horaDesde >= horaDesde && horario.horaDesde < horaHasta){
-                return 1
+                return true
             }
             if(horario.horaHasta > horaDesde && horario.horaHasta <= horaHasta){
-                return 1
+                return true
             }
         }
-        else return 0
+        return false
     }
 
 }

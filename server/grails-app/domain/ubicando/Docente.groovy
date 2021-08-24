@@ -1,5 +1,6 @@
 package ubicando
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 class Docente {
@@ -32,9 +33,9 @@ class Docente {
     }
 
 
-    void reservarAulaParaExamen(Curso curso, Aula aula, Integer cantidadAlumnos, LocalDateTime horaInicio, LocalDateTime horaFin){
+    void reservarAulaParaExamen(Curso curso, Aula aula, Integer cantidadAlumnos, LocalDate diaExamen, Horario horarioExamen){
         if(aula.disponibleParaExamen(cantidadAlumnos, horaInicio, horaFin)){
-            Examen examen = new Examen(horaInicio: horaInicio, horaFin: horaFin, materia: curso.getcodMateria(), cantidadAlumnos: cantidadAlumnos)
+            Examen examen = new Examen(diaExamen: diaExamen, horario: horarioExamen, materia: curso.getcodMateria(), cantidadAlumnos: cantidadAlumnos)
             aula.reservarParaExamen(examen, curso)
             examen.getCursos().add(curso)
         }

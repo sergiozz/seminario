@@ -2,7 +2,7 @@ package ubicando
 
 class Curso {
 
-    ArrayList<Horario> horarios
+    ArrayList<Horario> horarios = new ArrayList<Horario>()
     Docente docenteTitular
     //static hasOne = [docenteTitular: Docente]
     String codMateria
@@ -21,10 +21,10 @@ class Curso {
     boolean superpuesto(Curso otroCurso) {
         boolean superpuesto = false
         int i = 0
-        while (!superpuesto && i < horarios.size()){
+        while (!superpuesto && i < this.horarios.size()){
             int j = 0
             while (!superpuesto && j < otroCurso.horarios.size()) {
-                superpuesto = curso.superpuesto(cursos.get(i))
+                superpuesto = otroCurso.horarios.get(j).superposicion(this.horarios.get(i))
                 j++
             }
             i++
