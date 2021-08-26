@@ -47,7 +47,6 @@
     </nav>
 
 
-
     <div id="content" role="main">
       <section class="row colset-2-its" style=" max-width: none;">
         <h1 class="logot">Ubicando</h1> 

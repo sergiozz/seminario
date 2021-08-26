@@ -36,6 +36,7 @@ class DocenteSpec extends Specification implements DomainUnitTest<Docente> {
         aula2.getCursos().contains(curso)
     }
 
+    //TODO REVISAR
     void "docente no puede cambiar el aula de su curso si el aula no esta disponible"() {
         given: "docente con un curso y un aula sin disponibilidad"
         Docente docente = new Docente()

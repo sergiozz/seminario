@@ -4,7 +4,6 @@ class DocenteController {
 
     static scaffold = Docente
 
-
 	def docenteService
 
     def getAll(Integer max) {

@@ -7,7 +7,6 @@ class Curso {
     //static hasOne = [docenteTitular: Docente]
     String codMateria
     String descripcion
-    //Materia materia
     Integer numCurso
     boolean aceptaSuscripcion = true
     Aula aulaActual

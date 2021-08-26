@@ -4,7 +4,6 @@ class CursoController {
 
     static scaffold = Curso
 
-
 	def cursoService
 
     def getCursosPorCodigo(Integer codMateria) {     

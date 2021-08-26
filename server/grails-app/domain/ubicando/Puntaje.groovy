@@ -10,7 +10,5 @@ class Puntaje {
     static constraints = {
         calificacion blank: false, min: 0, max: 10
         comentario blank: false, nullable: false
-    }
-
-    
+    }    
 }

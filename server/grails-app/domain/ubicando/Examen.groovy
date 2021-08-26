@@ -15,7 +15,6 @@ class Examen {
     static constraints = {
     }
 
-
     void asignarAula(Aula aula) {
         this.aulas.add(aula)
     }

@@ -14,7 +14,6 @@ class SolicitudIntercambio {
     static constraints = {
     }
 
-
     void aceptarIntercambio(Docente docente) {}
 
     void rechazarIntercambio(Docente docente) {}

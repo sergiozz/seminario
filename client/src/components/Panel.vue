@@ -140,8 +140,6 @@ export default {
         axios.get(`${this.serverURL}/curso/getCursosPorCodigo/${this.seleccionMateria}`).then(response => {
           console.log(response.data)
           response.data.forEach(element => {
-            //let elemJson = JSON.stringify(element)
-            //console.log(elemJson.docenteTitular)
             let elem = {
                 value: element, 
                 text: element.numCurso + ' ' + element.descripcion
@@ -157,12 +155,12 @@ export default {
        switch (this.seleccionAccion) {
         //Sumarse a un curso
         case this.actionsAlum[1].value:
-         /*        let request = { 
+          let request = { 
             idAlumno: this.$store.state.userLogin.id, 
             idCurso: this.seleccionCurso.id
-          } 
-          console.log(request)  */
-          axios.get(`${this.serverURL}/alumno/suscribirCurso/${this.$store.state.userLogin.id}/${this.seleccionCurso.id}`).then(response => {
+          };
+          console.log(request)  
+          axios.post(`${this.serverURL}/alumno/suscribirCurso2/`, request).then(response => {
             console.log(response.data)
           // response.data.forEach(element => {
           //   console.log(element)
@@ -204,8 +202,7 @@ export default {
           });
         }).catch(error => {
           console.log(error);
-        })
-     
+        })     
     }
 
   } 

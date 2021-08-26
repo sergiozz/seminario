@@ -24,7 +24,7 @@ abstract class AlumnoService {
 
         def respuesta = alumno.suscribirseACurso(curso)
         //Es necesario?
-        //if (!respuesta.contains("Error")) save(alumno)
+        save(alumno)
 
         return respuesta
     }
@@ -41,19 +41,5 @@ abstract class AlumnoService {
         Alumno alumno = Alumno.findById(idAlumno)
         return alumno.getCursosSuscriptos().keySet()
     }
-
-    
-/*
-	ArrayList getCurrent() {
-        return Constants.todasLasAcciones
-    }
-
-     LinkedHashSet<Pedido> getPedidosEnProceso(Alumno alumno) {
-        return alumno.getPedidosEnProceso();
-    }
-
-    boolean tienePedidosEnProceso(Alumno alumno) {
-        return alumno.tienePedidosEnProceso();
-    } */
 
 }

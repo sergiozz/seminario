@@ -2,9 +2,7 @@ package ubicando
 
 import grails.core.GrailsApplication
 import grails.plugins.*
-
 import java.time.LocalDateTime
-
 import static Constants.*
 
 class ApplicationController implements PluginManagerAware {
@@ -115,8 +113,6 @@ class ApplicationController implements PluginManagerAware {
             alumnoService.save(mock_alumno2)
             alumnoService.save(mock_alumno3)
             alumnoService.save(mock_alumno4)
-        }
-
-        return 
+        } 
     }
 }

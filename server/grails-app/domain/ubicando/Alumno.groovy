@@ -14,6 +14,9 @@ class Alumno {
     }
 
     private boolean suscriptoACurso (Curso curso){
+/*         def xx = cursosSuscriptos[curso.id]
+        println xx
+        return xx? true : false */
         return cursosSuscriptos.containsKey(curso)
     }
 
@@ -23,8 +26,8 @@ class Alumno {
         if (!curso.getAceptaSuscripcion()) return "Error: El curso no acepta nuevas suscripciones"
         
         //println "ook"
-        println cursosSuscriptos
         cursosSuscriptos.put(curso, LocalDateTime.now())
+        println cursosSuscriptos
         return "El alumno fue suscripto al curso exitosamente"
     }
 

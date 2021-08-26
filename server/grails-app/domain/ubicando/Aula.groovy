@@ -10,7 +10,7 @@ class Aula {
     Integer capacidad
     ArrayList<Curso> cursos = new ArrayList<Curso>()
     ArrayList<Examen> examenes = new ArrayList<Examen>()
-    boolean  pendienteDesinfeccion = false
+    boolean pendienteDesinfeccion = false
 
     static constraints = {
     }
@@ -31,8 +31,6 @@ class Aula {
             curso.setAulaActual(this)
         }
     }
-
-
 
     boolean disponibleParaExamen(Integer cantidadAlumnos, LocalDate dia, Horario horario) {
         if (cantidadAlumnos <= capacidad && !pendienteDesinfeccion){

@@ -19,10 +19,10 @@ abstract class DocenteService {
     protected abstract Docente save(Docente docente)
 
     def solicitarCambioDeAula(Integer idDocente, Integer idCurso, Integer idAula){
-
         Docente docente = Docente.findById(idDocente)
         Curso curso = Curso.findById(idCurso)
         Aula aula = Aula.findById(idAula)
+        
         return docente.cambiarAulaDeCurso(curso, aula)
     }
 

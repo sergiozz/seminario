@@ -44,6 +44,7 @@ class ExamenSpec extends Specification implements DomainUnitTest<Examen> {
         aula1.examenes.get(0) == examen
     }
 
+    //TODO REVISAR
     void "en un aula con un curso no puedo cargar un examen si se superponen los horario"() {
         given: "un aula con un curso"
         Aula aula1 = new Aula(numero: 100, piso:1, capacidad: 50)

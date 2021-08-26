@@ -21,5 +21,4 @@ class Horario {
         }
         return false
     }
-
 }
