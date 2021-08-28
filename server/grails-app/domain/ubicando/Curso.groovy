@@ -13,8 +13,11 @@ class Curso {
     HashMap<Alumno, Puntaje> puntajes = new HashMap<Alumno, Puntaje>()
     BigDecimal calificacionMedia = 0
 
+    static belongsTo = [alumno: Alumno]
+
     static constraints = {
         aulaActual nullable: true
+        alumno nullable: true
     }
 
     boolean superpuesto(Curso otroCurso) {

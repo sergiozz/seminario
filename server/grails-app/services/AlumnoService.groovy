@@ -1,5 +1,6 @@
 package ubicando
 
+import java.time.LocalDateTime
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 //import static Constants.*

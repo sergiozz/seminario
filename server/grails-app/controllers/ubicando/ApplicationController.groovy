@@ -108,7 +108,8 @@ class ApplicationController implements PluginManagerAware {
             mock_alumno2 = new Alumno(nombre: "Lucas", apellido: "Gonzalez")
             mock_alumno3 = new Alumno(nombre: "Marta", apellido: "Perez")
             mock_alumno4 = new Alumno(nombre: "Paula", apellido: "Ortiz")
-            mock_alumno4.getCursosSuscriptos().put(mock_curso1, LocalDateTime.now().minusDays(15))
+            // TODO esto rompe
+            //mock_alumno4.getCursosSuscriptos().put(mock_curso1, LocalDateTime.now().minusDays(15))
             alumnoService.save(mock_alumno1)
             alumnoService.save(mock_alumno2)
             alumnoService.save(mock_alumno3)

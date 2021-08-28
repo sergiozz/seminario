@@ -7,17 +7,21 @@ class Alumno {
 
     String nombre
     String apellido
-    HashMap<Curso, LocalDateTime> cursosSuscriptos = new HashMap<Curso, LocalDateTime>()
+    //TODOS los hashmap y arraylist creo q deberiamos borrarlos
+    HashMap<Curso, LocalDateTime> cursosSuscriptos2 = new HashMap<Curso, LocalDateTime>()
     ArrayList<Puntaje> puntajes = new ArrayList<Puntaje>()
 
+    static hasMany = [ cursosSuscriptos: Curso ]
+
     static constraints = {
+        cursosSuscriptos nullable: true
     }
 
     private boolean suscriptoACurso (Curso curso){
 /*         def xx = cursosSuscriptos[curso.id]
         println xx
         return xx? true : false */
-        return cursosSuscriptos.containsKey(curso)
+        return cursosSuscriptos?.contains(curso)
     }
 
     String suscribirseACurso(Curso curso){
@@ -26,13 +30,14 @@ class Alumno {
         if (!curso.getAceptaSuscripcion()) return "Error: El curso no acepta nuevas suscripciones"
         
         //println "ook"
-        cursosSuscriptos.put(curso, LocalDateTime.now())
+        addToCursosSuscriptos(curso)
+        //cursosSuscriptos.put(curso, LocalDateTime.now())
         println cursosSuscriptos
         return "El alumno fue suscripto al curso exitosamente"
     }
 
     private boolean puedePuntuarCurso (Curso curso, LocalDateTime dia){
-        return (suscriptoACurso(curso) && cursosSuscriptos.get(curso).isBefore(dia.minusDays(Constants.MIN_DIAS_PARA_PUNTUAR)))
+        return (suscriptoACurso(curso) && cursosSuscriptos2.get(curso).isBefore(dia.minusDays(Constants.MIN_DIAS_PARA_PUNTUAR)))
     }
 
     void puntuarCurso (Curso curso, Integer calificacion, String comentario){
