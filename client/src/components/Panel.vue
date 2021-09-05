@@ -49,15 +49,15 @@
 
         <br>
         <div style="background: aliceblue;">          
-          <div v-if="seleccionAccion == actionsAlum[1].value">
+          <div v-if="seleccionAccion ==  (actionsAlum[1] && actionsAlum[1].value)">
             <h4>Materia</h4>
             <b-form-select v-model="seleccionMateria" :options="materiasList" @change="changeMateria" class="m-2 wid80 roleselecion"/>
             <h4>Curso</h4>
             <b-form-select v-model="seleccionCurso" :options="cursosList" class="m-2 wid80 roleselecion"/>
             <div v-if="cursosInscriptosList.length != 0">{{cursosInscriptosList}}</div>
           </div>
-          <p v-if="responseMsj" style="background: aquamarine;">{{responseMsj}}</p>
-          <p v-if="responseError" style="background: crimson;">{{responseError}}</p>
+          <h5 v-if="responseMsj" style="background: aquamarine; padding: 6px;">{{responseMsj}}</h5>
+          <h5 v-if="responseError" style="background: crimson; padding: 6px;">{{responseError}}</h5>
         </div>
 
         <br>
@@ -102,15 +102,12 @@ export default {
     getAcciones() {     
       axios.get(`${this.serverURL}/application/acciones`).then(response => {
           console.log(response.data)
-
           response.data.accionesAlumno.forEach(element => {
              this.actionsAlum.push(element)            
           });
-
           response.data.accionesDocente.forEach(element => {
              this.actionsDoc.push(element)            
           });
-
         }).catch(error => {
           console.log(error);
         })
@@ -152,28 +149,27 @@ export default {
     },
 
     confirmAction(){
+      this.responseMsj= '';
+      this.responseError= '';
        switch (this.seleccionAccion) {
         //Sumarse a un curso
-        case this.actionsAlum[1].value:
-          let request = { 
-            idAlumno: this.$store.state.userLogin.id, 
-            idCurso: this.seleccionCurso.id
-          };
-          console.log(request)  
-          axios.post(`${this.serverURL}/alumno/suscribirCurso2/`, request).then(response => {
-            console.log(response.data)
-          // response.data.forEach(element => {
-          //   console.log(element)
-              //this.materiasList.push(element)            
-          // });
-          if (response.data.status == 200)
-              this.responseMsj = response.data.mensaje
-            else
-              this.responseError = response.data.mensaje
-          }).catch(error => {
-            console.log(error);
-          })
-          break;
+        case this.actionsAlum[1].value: {
+            let request = { 
+              idAlumno: this.$store.state.userLogin.id, 
+              idCurso: this.seleccionCurso.id
+            };
+            console.log(request);  
+            axios.post(`${this.serverURL}/alumno/suscribirCurso/`, request).then(response => {
+              console.log(response.data)
+            if (response.data.status == 200)
+                this.responseMsj = response.data.mensaje
+              else
+                this.responseError = response.data.mensaje
+            }).catch(error => {
+              console.log(error);
+            });
+            break;
+          }
       
         default:
           break;
