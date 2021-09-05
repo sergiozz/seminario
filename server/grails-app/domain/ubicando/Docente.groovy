@@ -7,8 +7,11 @@ class Docente {
 
     String nombre
     String apellido
-    ArrayList<Curso> titularDeCursos = new ArrayList<Curso>()
-    ArrayList<SolicitudIntercambio> solicitudIntercambios = new ArrayList<SolicitudIntercambio>()
+    List titularDeCursos = []
+    List solicitudIntercambio = []
+    static hasMany = [titularDeCursos: Curso, solicitudIntercambio: SolicitudIntercambio]
+    //ArrayList<Curso> titularDeCursos = new ArrayList<Curso>()
+    //ArrayList<SolicitudIntercambio> solicitudIntercambios = new ArrayList<SolicitudIntercambio>()
 
     static constraints = {
     }
