@@ -33,10 +33,9 @@ abstract class AlumnoService {
         return alumno.puntuarCurso(curso, calificacion, comentario)
     }
 
-    //TODO revisar
     def obtenerCursosSuscriptos (Integer idAlumno){
         Alumno alumno = Alumno.findById(idAlumno)
-        return alumno.getCursosSuscriptos().keySet()
+        return alumno.cursosSuscriptos
     }
 
 }

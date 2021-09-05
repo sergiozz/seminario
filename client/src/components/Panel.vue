@@ -54,8 +54,21 @@
             <b-form-select v-model="seleccionMateria" :options="materiasList" @change="changeMateria" class="m-2 wid80 roleselecion"/>
             <h4>Curso</h4>
             <b-form-select v-model="seleccionCurso" :options="cursosList" class="m-2 wid80 roleselecion"/>
-            <div v-if="cursosInscriptosList.length != 0">{{cursosInscriptosList}}</div>
           </div>
+
+          <div v-if="(seleccionAccion == (actionsAlum[4] && actionsAlum[4].value))">
+            <div v-if="cursosInscriptosList.length != 0">
+              <h5 style="padding: 10px;">
+                <li v-for="curso in cursosInscriptosList" :key="curso.id">
+                  {{curso.codMateria}} : {{curso.descripcion}}
+                </li>
+              </h5>
+            </div>
+            <div v-else>
+              <h4 style="padding: 10px;"> Sin suscripciones registradas</h4>
+            </div>
+          </div>
+
           <h5 v-if="responseMsj" style="background: aquamarine; padding: 6px;">{{responseMsj}}</h5>
           <h5 v-if="responseError" style="background: crimson; padding: 6px;">{{responseError}}</h5>
         </div>
@@ -134,6 +147,7 @@ export default {
 
     changeMateria(){
       this.cursosList = [{ value: 0, text: aux.SIN_SELECCION}]; //.slice();
+      this.seleccionCurso=0;
         axios.get(`${this.serverURL}/curso/getCursosPorCodigo/${this.seleccionMateria}`).then(response => {
           console.log(response.data)
           response.data.forEach(element => {
@@ -193,6 +207,7 @@ export default {
     consultaCursosInscriptos(){
        axios.get(`${this.serverURL}/alumno/getAllCursosInscriptos/${this.$store.state.userLogin.id}`).then(response => {
           console.log(response.data)
+          this.cursosInscriptosList = [];//.slice();
           response.data.forEach(element => {
              this.cursosInscriptosList.push(element)            
           });

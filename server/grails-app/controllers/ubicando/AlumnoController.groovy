@@ -12,8 +12,8 @@ class AlumnoController {
         respond alumnoService.list(params), model:[alumnoCount: alumnoService.count()]
     }
 
-    def getAllCursosInscriptos(Integer id) {
-        respond alumnoService.obtenerCursosSuscriptos(id)
+    def getAllCursosInscriptos(Integer idAlumno) {
+        respond alumnoService.obtenerCursosSuscriptos(idAlumno)
     }
 
     def suscribirCurso(RequestSuscribirCurso requestSuscribirCurso) {
