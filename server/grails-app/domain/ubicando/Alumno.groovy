@@ -11,6 +11,7 @@ class Alumno {
     HashMap<Curso, LocalDateTime> cursosSuscriptos2 = new HashMap<Curso, LocalDateTime>()
     ArrayList<Puntaje> puntajes = new ArrayList<Puntaje>()
 
+    List cursosSuscriptos = []
     static hasMany = [ cursosSuscriptos: Curso ]
 
     static constraints = {
