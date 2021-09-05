@@ -39,7 +39,7 @@ class Docente {
     void reservarAulaParaExamen(Curso curso, Aula aula, Integer cantidadAlumnos, LocalDate diaExamen, Horario horarioExamen){
         if(aula.disponibleParaExamen(cantidadAlumnos, horaInicio, horaFin)){
             Examen examen = new Examen(diaExamen: diaExamen, horario: horarioExamen, materia: curso.getcodMateria(), cantidadAlumnos: cantidadAlumnos)
-            aula.reservarParaExamen(examen, curso)
+            aula.reservarParaExamen(examen)
             examen.getCursos().add(curso)
         }
     }

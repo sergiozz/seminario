@@ -31,7 +31,7 @@ class Curso {
             }
             i++
         }
-        return !superpuesto
+        return superpuesto
     }
 
     boolean puedePuntuar(Alumno alumno){

@@ -8,8 +8,9 @@ class Aula {
     String numero
     Integer piso
     Integer capacidad
-    ArrayList<Curso> cursos = new ArrayList<Curso>()
-    ArrayList<Examen> examenes = new ArrayList<Examen>()
+    List cursos = []
+    List examenes = []
+    static hasMany = [cursos: Curso, examenes: Examen]
     boolean pendienteDesinfeccion = false
 
     static constraints = {
