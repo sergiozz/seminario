@@ -13,23 +13,14 @@ class AlumnoController {
     }
 
     def getAllCursosInscriptos(Integer id) {
-        respond alumnoService.obtenerCurosSuscriptos(id)
+        respond alumnoService.obtenerCursosSuscriptos(id)
     }
 
-    def suscribirCurso(Integer idAlumno, Integer idCurso) {
-        def respuesta = alumnoService.suscribirCurso(idAlumno, idCurso)
-        def mapResponse
-        if (respuesta.contains("Error")) mapResponse = [status: 400, mensaje: respuesta]
-        else mapResponse = [status: 200, mensaje:respuesta]
-
-        respond mapResponse  
-    }
-
-    def suscribirCurso2(RequestSuscribirCurso requestSuscribirCurso) {
+    def suscribirCurso(RequestSuscribirCurso requestSuscribirCurso) {
         def respuesta = alumnoService.suscribirCurso(requestSuscribirCurso.idAlumno, requestSuscribirCurso.idCurso)
         def mapResponse
         if (respuesta.contains("Error")) mapResponse = [status: 400, mensaje: respuesta]
-        else mapResponse = [status: 200, mensaje:respuesta]
+        else mapResponse = [status: 200, mensaje: respuesta]
 
         respond mapResponse  
     }

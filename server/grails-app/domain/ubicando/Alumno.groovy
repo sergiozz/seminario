@@ -18,21 +18,15 @@ class Alumno {
     }
 
     private boolean suscriptoACurso (Curso curso){
-/*         def xx = cursosSuscriptos[curso.id]
-        println xx
-        return xx? true : false */
         return cursosSuscriptos?.contains(curso)
     }
 
     String suscribirseACurso(Curso curso){
         if (suscriptoACurso(curso)) return "Error: Ya se encuentra suscripto el alumno al curso"
-        if (cursosSuscriptos.size() + 1 > Constants.MAXSUSCRIPCIONES ) return "Error: El curso se encuentra lleno"
+        if (cursosSuscriptos.size() + 1 > Constants.MAXSUSCRIPCIONES ) return "Error: Supera el numero de suscripciones permitidas"
         if (!curso.getAceptaSuscripcion()) return "Error: El curso no acepta nuevas suscripciones"
         
-        //println "ook"
         addToCursosSuscriptos(curso)
-        //cursosSuscriptos.put(curso, LocalDateTime.now())
-        println cursosSuscriptos
         return "El alumno fue suscripto al curso exitosamente"
     }
 
