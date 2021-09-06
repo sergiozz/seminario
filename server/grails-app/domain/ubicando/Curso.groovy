@@ -40,15 +40,13 @@ class Curso {
         return superpuesto
     }
 
-    // TODO verificar q funcione
-    boolean puedePuntuar(Long idAlumno){
-        if (puntajes == null) return true
-        return puntajes.findAllByIdAlumno(idAlumno).isEmpty()
+    boolean puedePuntuar(Alumno alumno){
+        def cantidad = (puntajes.findAll { it.alumno == alumno }).size()
+        return cantidad == 0
     }
 
-    // TODO verificar q funcione
     void recibirPuntuacion(Puntaje puntaje){
-        if (puedePuntuar(puntaje.idAlumno)){
+        if (puedePuntuar(puntaje.alumno)){
             calificacionMedia = (calificacionMedia * puntajes.size() + puntaje.calificacion) / (puntajes.size() + 1)
             addToPuntajes(puntaje)
         }

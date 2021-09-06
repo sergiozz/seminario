@@ -35,8 +35,8 @@ class Alumno {
 
     String puntuarCurso (Curso curso, Integer calificacion, String comentario){
         if (puedePuntuarCurso(curso, LocalDateTime.now())){
-            Puntaje puntuacion = new Puntaje(alumno: this.id, curso: curso.id, calificacion: calificacion, comentario: comentario)
-            if (curso.puedePuntuar(this.id)){
+            Puntaje puntuacion = new Puntaje(alumno: this, calificacion: calificacion, comentario: comentario, curso: curso)
+            if (curso.puedePuntuar(this)){
                 addToPuntuacionesRealizadas(puntuacion)
                 curso.recibirPuntuacion(puntuacion)
                 return "La puntuación fue realizada con éxito"

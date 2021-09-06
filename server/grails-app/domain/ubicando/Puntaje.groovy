@@ -2,10 +2,10 @@ package ubicando
 
 class Puntaje {
 
-    Long idAlumno
+    Alumno alumno
     Integer calificacion
     String comentario
-    Long idCurso
+    Curso curso
 
     static constraints = {
         calificacion blank: false, min: 0, max: 10

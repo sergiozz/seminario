@@ -25,8 +25,8 @@ class AlumnoController {
         respond mapResponse  
     }
 
-    def puntuarCurso(Puntaje puntaje){
-        def respuesta = alumnoService.puntuarCurso(puntaje.idAlumno, puntaje.calificacion, puntaje.comentario, puntaje.idCurso)
+    def puntuarCurso(RequestPuntuarCurso requestPuntuarCurso){
+        def respuesta = alumnoService.puntuarCurso(requestPuntuarCurso.idAlumno, requestPuntuarCurso.calificacion, requestPuntuarCurso.comentario, requestPuntuarCurso.idCurso)
         def mapResponse
         if (respuesta.contains("Error")) mapResponse = [status: 400, mensaje: respuesta]
         else mapResponse = [status: 200, mensaje: respuesta]
