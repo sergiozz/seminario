@@ -8,8 +8,8 @@ class Docente {
     String nombre
     String apellido
     List titularDeCursos = []
-    List solicitudIntercambio = []
-    static hasMany = [titularDeCursos: Curso, solicitudIntercambio: SolicitudIntercambio]
+    List solicitudIntercambios = []
+    static hasMany = [titularDeCursos: Curso, solicitudIntercambios: SolicitudIntercambio]
     //ArrayList<Curso> titularDeCursos = new ArrayList<Curso>()
     //ArrayList<SolicitudIntercambio> solicitudIntercambios = new ArrayList<SolicitudIntercambio>()
 
@@ -23,16 +23,18 @@ class Docente {
         }
     }
 
-    void solicitarIntercambio(Curso curso){
-        curso.getDocenteTitular().getSolicitudIntercambios().add(new SolicitudIntercambio())
+    void solicitarIntercambio(Curso cursoSolicitante, cursoSolicitado){
+        if(cursoSolicitante.docenteTitular == this){
+            cursoSolicitado.getDocenteTitular().getSolicitudIntercambios().add(new SolicitudIntercambio(cursoSolicitante: cursoSolicitante, cursoSolicitado: cursoSolicitado))
+        }
     }
 
-    void aceptarSolicitudIntercambio(SolicitudIntercambio solicitud){
-        solicitud.aceptarIntercambio(this)
+    def aceptarSolicitudIntercambio(SolicitudIntercambio solicitud){
+        return solicitud.aceptarIntercambio(this)
     }
 
-    void rechazrSolicitudIntercambio(SolicitudIntercambio solicitud){
-        solicitud.rechazarIntercambio(this)
+    def rechazarSolicitudIntercambio(SolicitudIntercambio solicitud){
+        return solicitud.rechazarIntercambio(this)
     }
 
 
