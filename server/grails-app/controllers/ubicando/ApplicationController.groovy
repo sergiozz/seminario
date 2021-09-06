@@ -81,7 +81,6 @@ class ApplicationController implements PluginManagerAware {
             horariosCurso1.add(horario1)
             horariosCurso1.add(horario2)
             mock_curso1 = new Curso(codMateria: 9268, docenteTitular: mock_docente1, numCurso: 1, descripcion: "Curso Gomez", aulaActual:  mock_aula1, horarios: horariosCurso1)
-
             mock_curso2 = new Curso(codMateria: 6147, docenteTitular: mock_docente2, numCurso: 1, descripcion: "Curso Mendez", aulaActual:  mock_aula2, horarios: horariosCurso1)
 
             def horariosCurso3 = new ArrayList<Horario>()
@@ -108,8 +107,8 @@ class ApplicationController implements PluginManagerAware {
             mock_alumno2 = new Alumno(nombre: "Lucas", apellido: "Gonzalez")
             mock_alumno3 = new Alumno(nombre: "Marta", apellido: "Perez")
             mock_alumno4 = new Alumno(nombre: "Paula", apellido: "Ortiz")
-            // TODO esto rompe
-            //mock_alumno4.getCursosSuscriptos().put(mock_curso1, LocalDateTime.now().minusDays(15))
+
+            // TODO este no funciona    mock_alumno4.addToCursosSuscriptos(mock_curso1)
             alumnoService.save(mock_alumno1)
             alumnoService.save(mock_alumno2)
             alumnoService.save(mock_alumno3)

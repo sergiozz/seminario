@@ -67,12 +67,19 @@
                     {{curso.codMateria}} : {{curso.descripcion}}
                   </li>          
               </h5>
-              <b-form-textarea 
-                v-if="(seleccionAccion == actionsAlum[2].value)"
-                v-model="textPuntuacion"
-                placeholder="Escribir aquí su opinión..."
-                size="lg"
-              ></b-form-textarea>
+              <div v-if="(seleccionAccion == actionsAlum[2].value)">
+                <b-row> <b-col md="2">            
+                  <select v-model="nroPuntuacion">
+                    <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
+                  </select>
+                </b-col>
+                <b-col md="10"> <h5>Indique puntuación</h5></b-col> </b-row>       
+                <b-form-textarea                  
+                  v-model="textPuntuacion"
+                  placeholder="Escribir aquí su opinión..."
+                  size="lg"
+                ></b-form-textarea>
+              </div>
             </div>
             <div v-else>
               <h4 style="padding: 10px;"> Sin suscripciones registradas</h4>
@@ -118,6 +125,7 @@ export default {
       responseError: '',
       cursosInscriptosList: [],
       selectedPuntuacion: 0,
+      nroPuntuacion: 0,
       textPuntuacion: ''
     }
   },
@@ -143,6 +151,7 @@ export default {
       this.responseMsj= '';
       this.responseError= '';
       this.selectedPuntuacion= 0;
+      this.nroPuntuacion= 0;
       this.textPuntuacion= '';
       switch (this.seleccionAccion) {
         //Sumarse a un curso
@@ -189,13 +198,15 @@ export default {
             break;
           }
 
-        //Puntuar un curso TODO falta
+        //Puntuar un curso
         case this.actionsAlum[2].value: {
             console.log('Puntuar un curso');
-            if (this.selectedPuntuacion== 0) return;
+            if (this.selectedPuntuacion == 0 || this.textPuntuacion.length == 0 || this.nroPuntuacion == 0) return;
             let request = { 
               idAlumno: this.$store.state.userLogin.id, 
-              idCurso: this.seleccionCurso.id
+              calificacion: this.nroPuntuacion, 
+              comentario: this.textPuntuacion, 
+              idCurso: this.selectedPuntuacion
             };
             axios.post(`${this.serverURL}/alumno/puntuarCurso/`, request).then(response => {
               console.log(response.data)

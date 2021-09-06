@@ -1,5 +1,5 @@
 package ubicando
-import grails.converters.JSON
+//import grails.converters.JSON
 
 class AlumnoController {
 
@@ -25,8 +25,13 @@ class AlumnoController {
         respond mapResponse  
     }
 
-    def puntuarCurso(Integer idAlumno, Integer idCurso, Integer calificacion, String comentario){
-        respond alumnoService.puntuarCurso(idAlumno, idCurso)
+    def puntuarCurso(Puntaje puntaje){
+        def respuesta = alumnoService.puntuarCurso(puntaje.idAlumno, puntaje.idCurso, puntaje.calificacion, puntaje.comentario)
+        def mapResponse
+        if (respuesta.contains("Error")) mapResponse = [status: 400, mensaje: respuesta]
+        else mapResponse = [status: 200, mensaje: respuesta]
+
+        respond mapResponse  
     }
 
 }

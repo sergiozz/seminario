@@ -12,8 +12,10 @@ class UrlMappings {
         "/"(controller: 'application', action:'index')
 
         "/curso/getCursosPorCodigo/${codMateria}"(controller: 'curso', action:'getCursosPorCodigo')
-        post "/alumno/suscribirCurso/"(controller: 'alumno', action:'suscribirCurso')
         "/alumno/getAllCursosInscriptos/${idAlumno}"(controller: 'alumno', action:'getAllCursosInscriptos')
+        post "/alumno/suscribirCurso/"(controller: 'alumno', action:'suscribirCurso')
+        post "/alumno/puntuarCurso/"(controller: 'alumno', action:'puntuarCurso')
+
         "/alumno/getAll"(controller: 'alumno', action:'getAll')
         "/docente/getAll"(controller: 'docente', action:'getAll')
         "/application/acciones"(controller: 'application', action:'getAllActions')

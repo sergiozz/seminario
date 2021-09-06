@@ -7,15 +7,13 @@ class Alumno {
 
     String nombre
     String apellido
-    //TODOS los hashmap y arraylist creo q deberiamos borrarlos
-    HashMap<Curso, LocalDateTime> cursosSuscriptos2 = new HashMap<Curso, LocalDateTime>()
-    ArrayList<Puntaje> puntajes = new ArrayList<Puntaje>()
-
     List cursosSuscriptos = []
-    static hasMany = [ cursosSuscriptos: Curso ]
+    List puntuacionesRealizadas = []
+    static hasMany = [ cursosSuscriptos: Curso, puntuacionesRealizadas: Puntaje]
 
     static constraints = {
         cursosSuscriptos nullable: true
+        puntuacionesRealizadas nullable: true
     }
 
     private boolean suscriptoACurso (Curso curso){
@@ -32,16 +30,23 @@ class Alumno {
     }
 
     private boolean puedePuntuarCurso (Curso curso, LocalDateTime dia){
-        return (suscriptoACurso(curso) && cursosSuscriptos2.get(curso).isBefore(dia.minusDays(Constants.MIN_DIAS_PARA_PUNTUAR)))
+        return (suscriptoACurso(curso) && curso.fechaDeSuscripciones.isBefore(dia.minusDays(Constants.MIN_DIAS_PARA_PUNTUAR)))
     }
 
-    void puntuarCurso (Curso curso, Integer calificacion, String comentario){
+    String puntuarCurso (Curso curso, Integer calificacion, String comentario){
         if (puedePuntuarCurso(curso, LocalDateTime.now())){
-            Puntaje puntaje = new Puntaje(alumno: this, curso: curso, calificacion: calificacion, comentario: comentario)
-            if (curso.puedePuntuar(this)){
-                puntajes.add(puntaje)
-                curso.recibirPuntuacion(puntaje)
+            Puntaje puntuacion = new Puntaje(alumno: this.id, curso: curso.id, calificacion: calificacion, comentario: comentario)
+            if (curso.puedePuntuar(this.id)){
+                addToPuntuacionesRealizadas(puntuacion)
+                curso.recibirPuntuacion(puntuacion)
+                return "La puntuación fue realizada con éxito"
             }
+            else {
+                return "Error: El curso no admite nuevas puntuaciones"
+            }
+        }
+        else {
+            return "Error: El alumno debe estar suscripto al curso por al menos de "+ Constants.MIN_DIAS_PARA_PUNTUAR +" días"
         }
     }
 }

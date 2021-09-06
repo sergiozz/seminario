@@ -1,4 +1,5 @@
 package ubicando
+import java.time.LocalDateTime
 
 class Curso {
 
@@ -10,14 +11,19 @@ class Curso {
     Integer numCurso
     boolean aceptaSuscripcion = true
     Aula aulaActual
-    HashMap<Alumno, Puntaje> puntajes = new HashMap<Alumno, Puntaje>()
+    LocalDateTime fechaDeSuscripciones = LocalDateTime.now()
+    List puntajes = []
+    //List horarios = []
     BigDecimal calificacionMedia = 0
 
+    static hasMany = [ puntajes: Puntaje]
     static belongsTo = [alumno: Alumno]
 
     static constraints = {
         aulaActual nullable: true
         alumno nullable: true
+        puntajes nullable: true
+        //horarios nullable: true
     }
 
     boolean superpuesto(Curso otroCurso) {
@@ -34,14 +40,17 @@ class Curso {
         return superpuesto
     }
 
-    boolean puedePuntuar(Alumno alumno){
-        return (!puntajes.containsKey(alumno))
+    // TODO verificar q funcione
+    boolean puedePuntuar(Integer idAlumno){
+        if (puntajes) return true
+        return puntajes.findAllByIdAlumno(idAlumno).isEmpty()
     }
 
+    // TODO verificar q funcione
     void recibirPuntuacion(Puntaje puntaje){
-        if (puedePuntuar(puntaje.alumno)){
+        if (puedePuntuar(puntaje.idAlumno)){
             calificacionMedia = (calificacionMedia * puntajes.size() + puntaje.calificacion) / (puntajes.size() + 1)
-            puntajes.put(puntaje.alumno, puntaje)
+            addToPuntajes(puntaje)
         }
     }
 }
