@@ -48,27 +48,38 @@
         </div>        
 
         <br>
-        <div style="background: aliceblue;">          
-          <div v-if="seleccionAccion ==  (actionsAlum[1] && actionsAlum[1].value)">
+        <div style="background: aliceblue;">
+          <!--Suscribir a cursos -->         
+          <div v-if="seleccionAccion == (actionsAlum[1] && actionsAlum[1].value)">
             <h4>Materia</h4>
             <b-form-select v-model="seleccionMateria" :options="materiasList" @change="changeMateria" class="m-2 wid80 roleselecion"/>
             <h4>Curso</h4>
             <b-form-select v-model="seleccionCurso" :options="cursosList" class="m-2 wid80 roleselecion"/>
           </div>
 
-          <div v-if="(seleccionAccion == (actionsAlum[4] && actionsAlum[4].value))">
+          <!--Consulta cursos inscriptos y puntuar cursos-->
+          <div v-if="(seleccionAccion == (actionsAlum[4] && actionsAlum[4].value)) || 
+                     (seleccionAccion == (actionsAlum[2] && actionsAlum[2].value))">
             <div v-if="cursosInscriptosList.length != 0">
-              <h5 style="padding: 10px;">
-                <li v-for="curso in cursosInscriptosList" :key="curso.id">
-                  {{curso.codMateria}} : {{curso.descripcion}}
-                </li>
+              <h5 style="padding: 10px;">               
+                  <li v-for="curso in cursosInscriptosList" :key="curso.id">
+                    <input v-if="(seleccionAccion == actionsAlum[2].value)" type="radio" v-model="selectedPuntuacion" :value="curso.id">
+                    {{curso.codMateria}} : {{curso.descripcion}}
+                  </li>          
               </h5>
+              <b-form-textarea 
+                v-if="(seleccionAccion == actionsAlum[2].value)"
+                v-model="textPuntuacion"
+                placeholder="Escribir aquí su opinión..."
+                size="lg"
+              ></b-form-textarea>
             </div>
             <div v-else>
               <h4 style="padding: 10px;"> Sin suscripciones registradas</h4>
             </div>
           </div>
-
+          
+          <!--Respuestas-->
           <h5 v-if="responseMsj" style="background: aquamarine; padding: 6px;">{{responseMsj}}</h5>
           <h5 v-if="responseError" style="background: crimson; padding: 6px;">{{responseError}}</h5>
         </div>
@@ -105,7 +116,9 @@ export default {
       seleccionCurso: 0,
       responseMsj: '',
       responseError: '',
-      cursosInscriptosList: []
+      cursosInscriptosList: [],
+      selectedPuntuacion: 0,
+      textPuntuacion: ''
     }
   },
   created () {
@@ -125,20 +138,76 @@ export default {
           console.log(error);
         })
     },
+
     changeAction(){
       this.responseMsj= '';
       this.responseError= '';
+      this.selectedPuntuacion= 0;
+      this.textPuntuacion= '';
       switch (this.seleccionAccion) {
         //Sumarse a un curso
         case this.actionsAlum[1].value:
           console.log('Sumarse a un curso');
           this.consultaCursos();
           break;
+        //Puntuar un curso
+        case this.actionsAlum[2].value:
+          console.log('Puntuar un curso');
+          this.consultaCursosInscriptos();
+
+          break;
         //Consultar cursos inscriptos
         case this.actionsAlum[4].value:
           console.log('Consultar cursos inscriptos');
           this.consultaCursosInscriptos();
           break;
+      
+        default:
+          break;
+      }
+    },
+
+    confirmAction(){
+      this.responseMsj= '';
+      this.responseError= '';
+       switch (this.seleccionAccion) {
+        //Sumarse a un curso
+        case this.actionsAlum[1].value: {
+            let request = { 
+              idAlumno: this.$store.state.userLogin.id, 
+              idCurso: this.seleccionCurso.id
+            };
+            axios.post(`${this.serverURL}/alumno/suscribirCurso/`, request).then(response => {
+              console.log(response.data)
+            if (response.data.status == 200)
+                this.responseMsj = response.data.mensaje
+              else
+                this.responseError = response.data.mensaje
+            }).catch(error => {
+              console.log(error);
+            });
+            break;
+          }
+
+        //Puntuar un curso TODO falta
+        case this.actionsAlum[2].value: {
+            console.log('Puntuar un curso');
+            if (this.selectedPuntuacion== 0) return;
+            let request = { 
+              idAlumno: this.$store.state.userLogin.id, 
+              idCurso: this.seleccionCurso.id
+            };
+            axios.post(`${this.serverURL}/alumno/puntuarCurso/`, request).then(response => {
+              console.log(response.data)
+            if (response.data.status == 200)
+                this.responseMsj = response.data.mensaje
+              else
+                this.responseError = response.data.mensaje
+            }).catch(error => {
+              console.log(error);
+            });
+            break;
+        }
       
         default:
           break;
@@ -160,35 +229,6 @@ export default {
         }).catch(error => {
           console.log(error);
         })
-    },
-
-    confirmAction(){
-      this.responseMsj= '';
-      this.responseError= '';
-       switch (this.seleccionAccion) {
-        //Sumarse a un curso
-        case this.actionsAlum[1].value: {
-            let request = { 
-              idAlumno: this.$store.state.userLogin.id, 
-              idCurso: this.seleccionCurso.id
-            };
-            console.log(request);  
-            axios.post(`${this.serverURL}/alumno/suscribirCurso/`, request).then(response => {
-              console.log(response.data)
-            if (response.data.status == 200)
-                this.responseMsj = response.data.mensaje
-              else
-                this.responseError = response.data.mensaje
-            }).catch(error => {
-              console.log(error);
-            });
-            break;
-          }
-      
-        default:
-          break;
-      }
-
     },
 
     consultaCursos(){
