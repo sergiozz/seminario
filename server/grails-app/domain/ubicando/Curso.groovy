@@ -41,8 +41,8 @@ class Curso {
     }
 
     // TODO verificar q funcione
-    boolean puedePuntuar(Integer idAlumno){
-        if (puntajes) return true
+    boolean puedePuntuar(Long idAlumno){
+        if (puntajes == null) return true
         return puntajes.findAllByIdAlumno(idAlumno).isEmpty()
     }
 

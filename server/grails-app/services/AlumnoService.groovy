@@ -26,7 +26,7 @@ abstract class AlumnoService {
         return alumno.suscribirseACurso(curso)
     }
 
-    def puntuarCurso(Integer idAlumno, Integer idCurso, Integer calificacion, String comentario){
+    def puntuarCurso(Long idAlumno, Integer calificacion, String comentario, Long idCurso){
         Alumno alumno = Alumno.findById(idAlumno)
         Curso curso = Curso.findById(idCurso)
 
