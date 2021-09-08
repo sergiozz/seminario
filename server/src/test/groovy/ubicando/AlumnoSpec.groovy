@@ -86,46 +86,46 @@ class AlumnoSpec extends Specification implements DomainUnitTest<Alumno> {
     void "un alumno puede puntuar un curso luego de 14 dias suscripto"(){
         given: "un alumno suscripto al curso por 15 dias"
         Alumno alumno = new Alumno()
-        Curso curso = new Curso()
+        Curso curso = new Curso(fechaDeSuscripciones: LocalDateTime.now().minusDays(15))
         alumno.suscribirseACurso(curso)
-        alumno.getCursosSuscriptos().put(curso, LocalDateTime.now().minusDays(15))
+        alumno.getCursosSuscriptos().add(curso)
 
         when: "Intenta realizar un puntaje cumpliendo las condiciones"
         alumno.puntuarCurso(curso, 8, "estoy puntuando correctamente un curso asi que deberia pasar este test :)")
 
         then: "el alumno puntua correctamente el curso y el curso tiene calificacion media"
-        alumno.getPuntajes().size() == 1
+        alumno.puntuacionesRealizadas.size() == 1
         curso.getCalificacionMedia() == 8
     }
 
     void "un alumno puede no puede untuar un curso luego de menos de 14 dias suscripto"(){
         given: "un alumno suscripto al curso por 5 dias"
         Alumno alumno = new Alumno()
-        Curso curso = new Curso()
+        Curso curso = new Curso(fechaDeSuscripciones: LocalDateTime.now().minusDays(5))
         alumno.suscribirseACurso(curso)
-        alumno.getCursosSuscriptos().put(curso, LocalDateTime.now().minusDays(5))
+        alumno.getCursosSuscriptos().add(curso)
 
         when: "Intenta realizar un puntaje sin cumplir las condiciones"
         alumno.puntuarCurso(curso, 8, "estoy puntuando incorrectamente un curso asi que no deberia pasar este test :)")
 
         then: "el alumno no  puede puntuar el curso"
-        alumno.getPuntajes().size() == 0
+        alumno.puntuacionesRealizadas.size() == 0
         curso.getCalificacionMedia() == 0
     }
 
     void "un alumno no puede puntuar mas de una vez el curso"(){
         given: "un alumno suscripto al curso por 15 dias"
         Alumno alumno = new Alumno()
-        Curso curso = new Curso()
+        Curso curso = new Curso(fechaDeSuscripciones: LocalDateTime.now().minusDays(15))
         alumno.suscribirseACurso(curso)
-        alumno.getCursosSuscriptos().put(curso, LocalDateTime.now().minusDays(15))
+        alumno.getCursosSuscriptos().add(curso)
 
         when: "Intenta realizar un puntaje dos veces"
         alumno.puntuarCurso(curso, 8, "estoy puntuando correctamente un curso asi que deberia pasar este test :)")
         alumno.puntuarCurso(curso, 4, "estoy puntuando incorrectamente un curso asi que no deberia pasar este test :)")
 
         then: "el alumno no  puede puntuar el curso"
-        alumno.getPuntajes().size() == 1
+        alumno.puntuacionesRealizadas.size() == 1
         curso.getCalificacionMedia() == 8
     }
 
