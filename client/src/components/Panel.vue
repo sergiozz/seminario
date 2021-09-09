@@ -87,10 +87,40 @@
             </div>
           </div>
 
-          <!--Reservar Aula para Examen -->         
-          <div v-if="seleccionAccion == (actionsDoc[3] && actionsDoc[3].value)">
-            <h4>Curso</h4>
-            <b-form-select v-model="seleccionCurso" :options="cursosInscriptosList" class="m-2 wid80 roleselecion"/>
+          <!--Reservar Aula para Examen y Consulta cursos inscriptos -->         
+          <div v-if="(seleccionAccion == (actionsDoc[3] && actionsDoc[3].value)) || 
+                    (seleccionAccion == (actionsDoc[6] && actionsDoc[6].value))">
+            <div v-if="cursosInscriptosList.length != 0">
+              <h5 style="padding: 10px;">               
+                  <li v-for="curso in cursosInscriptosList" :key="curso.id">
+                    <input v-if="(seleccionAccion == actionsDoc[3].value)" type="radio" v-model="selectedPuntuacion" :value="curso.id">
+                    {{curso.codMateria}} : {{curso.descripcion}}
+                  </li>          
+              </h5>
+              <div v-if="(seleccionAccion == actionsDoc[3].value)">
+                <b-row> <b-col md="2">            
+                  <select v-model="nroPuntuacion">
+                    <option v-for="n in 20" :key="n" :value="n*5">{{ n*5 }}</option>
+                  </select>
+                  </b-col>
+                  <b-col md="10"> <h5>Indique Nro de Alumnos</h5></b-col> 
+                </b-row>   
+                <br>    
+                <b-form-datepicker v-model="fechaExamen" class="mb-2"></b-form-datepicker>
+                <b-form-timepicker v-model="horaExamen" now-button reset-button locale="es"></b-form-timepicker>
+                <br>
+                 <b-row> <b-col md="2">            
+                  <select v-model="duracionExamen">
+                    <option v-for="n in 6" :key="n" :value="n">{{ n }}</option>
+                  </select>
+                  </b-col>
+                  <b-col md="10"> <h5>Duracion del Examen</h5></b-col> 
+                </b-row>   
+              </div>
+            </div>
+            <div v-else>
+              <h4 style="padding: 10px;"> Sin suscripciones registradas</h4>
+            </div>
           </div>
           
           <!--Respuestas-->
@@ -133,7 +163,10 @@ export default {
       cursosInscriptosList: [],
       selectedPuntuacion: 0,
       nroPuntuacion: 0,
-      textPuntuacion: ''
+      duracionExamen: 0,
+      textPuntuacion: '',
+      fechaExamen: '',
+      horaExamen: ''
     }
   },
   created () {
@@ -183,6 +216,12 @@ export default {
           console.log('Reservar Aula para Examen');
           this.consultaCursosTitular();
           break;
+
+        //Docente - Consultar cursos inscriptos
+        case this.actionsDoc[6].value:
+          console.log('Consultar cursos inscriptos');
+          this.consultaCursosTitular();
+          break;
       
         default:
           break;
@@ -222,6 +261,31 @@ export default {
               idCurso: this.selectedPuntuacion
             };
             axios.post(`${this.serverURL}/alumno/puntuarCurso/`, request).then(response => {
+              console.log(response.data)
+            if (response.data.status == 200)
+                this.responseMsj = response.data.mensaje
+              else
+                this.responseError = response.data.mensaje
+            }).catch(error => {
+              console.log(error);
+            });
+            break;
+        }
+
+        //Reservar Aula para Examen 
+        case this.actionsDoc[3].value: {
+            console.log('Reservar Aula para Examen ');
+            if (this.selectedPuntuacion == 0 || this.nroPuntuacion == 0  || this.duracionExamen == 0 || 
+                this.fechaExamen == '' || this.horaExamen == '') return;
+            let request = { 
+              idDocente: this.$store.state.userLogin.id, 
+              idCurso: this.selectedPuntuacion,
+              duracionExamen: this.duracionExamen, 
+              nroAlumnos: this.nroPuntuacion, 
+              fechaExamen: this.fechaExamen,
+              horaExamen: this.horaExamen
+            };
+            axios.post(`${this.serverURL}/docente/solicitarAulaParaExamen/`, request).then(response => {
               console.log(response.data)
             if (response.data.status == 200)
                 this.responseMsj = response.data.mensaje

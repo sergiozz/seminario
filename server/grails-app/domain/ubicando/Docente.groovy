@@ -13,13 +13,14 @@ class Docente {
 
     static constraints = {
         titularDeCursos nullable: true
+        solicitudIntercambios nullable: true
     }
 
     void cambiarAulaDeCurso(Curso curso, Aula aulaNueva){
         if (titularDeCursos.contains(curso) && aulaNueva.puedeAgregarCurso(curso)){
             curso.getAulaActual().getCursos().remove(curso)
             aulaNueva.agregarCurso(curso)
-        }
+        } 
     }
 
     void solicitarIntercambio(Curso cursoSolicitante, cursoSolicitado){
@@ -36,12 +37,11 @@ class Docente {
         return solicitud.rechazarIntercambio(this)
     }
 
-
-    void reservarAulaParaExamen(Curso curso, Aula aula, Integer cantidadAlumnos, LocalDate diaExamen, Horario horarioExamen){
+/*     void reservarAulaParaExamen(Curso curso, Aula aula, Integer cantidadAlumnos, LocalDate diaExamen, Horario horarioExamen){
         if(aula.disponibleParaExamen(cantidadAlumnos, horaInicio, horaFin)){
             Examen examen = new Examen(diaExamen: diaExamen, horario: horarioExamen, materia: curso.getcodMateria(), cantidadAlumnos: cantidadAlumnos)
             aula.reservarParaExamen(examen)
             examen.getCursos().add(curso)
         }
-    }
+    } */
 }

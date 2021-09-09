@@ -16,15 +16,12 @@ class UrlMappings {
         "/docente/getAllTitularDeCursos/${idDocente}"(controller: 'docente', action:'getAllTitularDeCursos')
         post "/alumno/suscribirCurso/"(controller: 'alumno', action:'suscribirCurso')
         post "/alumno/puntuarCurso/"(controller: 'alumno', action:'puntuarCurso')
+        post "/docente/solicitarAulaParaExamen/"(controller: 'docente', action:'solicitarAulaParaExamen')
 
         "/alumno/getAll"(controller: 'alumno', action:'getAll')
         "/docente/getAll"(controller: 'docente', action:'getAll')
         "/application/acciones"(controller: 'application', action:'getAllActions')
-        "/application/getMaterias"(controller: 'application', action:'getAllMaterias')
-        
-        "/application/cargaDatosComplejos"(controller: 'application', action:'cargaDatosComplejos')
-
-       
+        "/application/getMaterias"(controller: 'application', action:'getAllMaterias')   
 
         "500"(view: '/error')
         "404"(view: '/notFound')

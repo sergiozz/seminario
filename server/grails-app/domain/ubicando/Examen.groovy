@@ -9,13 +9,13 @@ class Examen {
     Horario horario
     Integer cantidadAlumnos
     String codMateria
-    ArrayList<Curso> cursos = new ArrayList<Curso>()
-    ArrayList<Aula> aulas = new ArrayList<Aula>()
+    Curso curso 
+    Aula aula
 
     static constraints = {
     }
 
-    void asignarAula(Aula aula) {
+/*     void asignarAula(Aula aula) {
         this.aulas.add(aula)
-    }
+    } */
 }

@@ -3,8 +3,7 @@ import java.time.LocalDateTime
 
 class Curso {
 
-    ArrayList<Horario> horarios = new ArrayList<Horario>()
-    //List horarios = []
+    //ArrayList<Horario> horarios = new ArrayList<Horario>()
     Docente docenteTitular
     String codMateria
     String descripcion
@@ -13,19 +12,20 @@ class Curso {
     Aula aulaActual
     LocalDateTime fechaDeSuscripciones = LocalDateTime.now()
     List puntajes = []
+    List horarios = []
     BigDecimal calificacionMedia = 0
 
     static hasOne = [docenteTitular: Docente]
-    static hasMany = [ puntajes: Puntaje]
+    static hasMany = [ puntajes: Puntaje, horarios: Horario]
 
     static constraints = {
         aulaActual nullable: true
         puntajes nullable: true
         docenteTitular nullable: true
-        //horarios nullable: true
+        horarios nullable: true
     }
 
-    boolean superpuesto(Curso otroCurso) {
+    boolean superpuesto(Curso otroCurso) { 
         boolean superpuesto = false
         int i = 0
         while (!superpuesto && i < this.horarios.size()){

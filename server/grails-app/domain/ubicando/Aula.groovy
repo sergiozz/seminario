@@ -14,6 +14,8 @@ class Aula {
     boolean pendienteDesinfeccion = false
 
     static constraints = {
+        cursos nullable: true
+        examenes nullable: true
     }
 
     boolean puedeAgregarCurso(Curso curso){

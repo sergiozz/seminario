@@ -10,7 +10,7 @@ class Horario {
         horaHasta nullable: false, min: 0, max: 23
     }
 
-    boolean superposicion(Horario horario) {
+    boolean superposicion(Horario horario) { 
         if (horario.dia == dia){
             if(horario.horaDesde >= horaDesde && horario.horaDesde < horaHasta){
                 return true

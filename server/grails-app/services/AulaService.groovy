@@ -25,4 +25,8 @@ abstract class AulaService {
         return Aula.findAllByCapacidadGreaterThanEquals(capacidad).findAll {aulaCandidata -> aulaCandidata.puedeAgregarCurso(curso)}
     }
 
+    def obtenerAulasDisponiblesParaExamen(LocalDate fechaExamen, Integer capacidad){
+        return Aula.findAllByCapacidadGreaterThanEquals(capacidad).findAll {aulaCandidata -> aulaCandidata.puedeAgregarExamen(fechaExamen)}
+    }
+
 }
