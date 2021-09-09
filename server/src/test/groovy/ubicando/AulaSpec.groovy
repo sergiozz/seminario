@@ -44,8 +44,8 @@ class AulaSpec extends Specification implements DomainUnitTest<Aula> {
         def horariosCurso2 = new ArrayList<Horario>()
         def horario3 = new Horario(dia: "Lunes", horaDesde: 11, horaHasta: 15)
         def horario4 = new Horario(dia: "Miercoles", horaDesde: 11, horaHasta: 15)
-        horariosCurso.add(horario3)
-        horariosCurso.add(horario4)
+        horariosCurso2.add(horario3)
+        horariosCurso2.add(horario4)
         Curso curso2 = new Curso(horarios: horariosCurso2)
         aula1.agregarCurso(curso2)
 
