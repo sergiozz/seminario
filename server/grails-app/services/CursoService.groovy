@@ -20,6 +20,5 @@ abstract class CursoService {
 
     def getCursosPorCodigo(Integer codMateria) {
 		  return Curso.findAllByCodMateria(codMateria)
-	  }
-
+	}
 }

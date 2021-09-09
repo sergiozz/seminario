@@ -11,6 +11,11 @@ class DocenteController {
         respond docenteService.list(params), model:[docenteCount: docenteService.count()]
     }
 
+    def getAllTitularDeCursos(Integer idDocente) {
+        Docente docente = Docente.findById(idDocente)
+        respond docente.titularDeCursos 
+    }
+
     def solicitarCambioDeAula(Integer idDocente, Integer idCurso, Integer idAula){
         respond docenteService.solicitarCambioDeAula(idDocente, idCurso, idAula)
         //TODO conectar con la historia de solicitar intercambio de aula con otro curso si no hay aulas disponibles

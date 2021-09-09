@@ -55,6 +55,7 @@ class ApplicationController implements PluginManagerAware {
             mock_docente2 = new Docente(nombre: "Lucio", apellido: "Mendez")
             mock_docente3 = new Docente(nombre: "Don Pedro", apellido: "Cruz")
             mock_docente4 = new Docente(nombre: "Luis", apellido: "Peralta")
+
             docenteService.save(mock_docente1)
             docenteService.save(mock_docente2)
             docenteService.save(mock_docente3)
@@ -96,10 +97,17 @@ class ApplicationController implements PluginManagerAware {
             horariosCurso4.add(horario1)
             horariosCurso4.add(horario2)
             mock_curso4 = new Curso(codMateria: 9268, docenteTitular: mock_docente4, numCurso: 2, descripcion: "Curso Peralta", aulaActual: mock_aula4, horarios: horariosCurso4)
+
             cursoService.save(mock_curso1)
             cursoService.save(mock_curso2)
             cursoService.save(mock_curso3)
             cursoService.save(mock_curso4)
+
+            // Carga de datos complejos
+            mock_curso4 = Curso.findById(4)
+            mock_curso3 = Curso.findById(3)
+            mock_docente4.addToTitularDeCursos(mock_curso4)
+            mock_docente4.addToTitularDeCursos(mock_curso3)
         }
 
         if (alumnoService.count() == 0){
@@ -108,11 +116,12 @@ class ApplicationController implements PluginManagerAware {
             mock_alumno3 = new Alumno(nombre: "Marta", apellido: "Perez")
             mock_alumno4 = new Alumno(nombre: "Paula", apellido: "Ortiz")
 
-            // TODO este no funciona    mock_alumno4.addToCursosSuscriptos(mock_curso1)
             alumnoService.save(mock_alumno1)
             alumnoService.save(mock_alumno2)
             alumnoService.save(mock_alumno3)
             alumnoService.save(mock_alumno4)
-        } 
+
+            alumnoService.suscribirCurso(4, 1)            
+        }
     }
 }

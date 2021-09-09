@@ -39,10 +39,10 @@ class Alumno {
             if (curso.puedePuntuar(this)){
                 addToPuntuacionesRealizadas(puntuacion)
                 curso.recibirPuntuacion(puntuacion)
-                return "La puntuación fue realizada con éxito"
+                return "La puntuación fue realizada con éxito. Gracias por participar."
             }
             else {
-                return "Error: El curso no admite nuevas puntuaciones"
+                return "Error: El curso no admite nuevas puntuaciones de un mismo usuario"
             }
         }
         else {

@@ -4,8 +4,8 @@ import java.time.LocalDateTime
 class Curso {
 
     ArrayList<Horario> horarios = new ArrayList<Horario>()
+    //List horarios = []
     Docente docenteTitular
-    //static hasOne = [docenteTitular: Docente]
     String codMateria
     String descripcion
     Integer numCurso
@@ -13,16 +13,15 @@ class Curso {
     Aula aulaActual
     LocalDateTime fechaDeSuscripciones = LocalDateTime.now()
     List puntajes = []
-    //List horarios = []
     BigDecimal calificacionMedia = 0
 
+    static hasOne = [docenteTitular: Docente]
     static hasMany = [ puntajes: Puntaje]
-    static belongsTo = [alumno: Alumno]
 
     static constraints = {
         aulaActual nullable: true
-        alumno nullable: true
         puntajes nullable: true
+        docenteTitular nullable: true
         //horarios nullable: true
     }
 

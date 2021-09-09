@@ -10,10 +10,9 @@ class Docente {
     List titularDeCursos = []
     List solicitudIntercambios = []
     static hasMany = [titularDeCursos: Curso, solicitudIntercambios: SolicitudIntercambio]
-    //ArrayList<Curso> titularDeCursos = new ArrayList<Curso>()
-    //ArrayList<SolicitudIntercambio> solicitudIntercambios = new ArrayList<SolicitudIntercambio>()
 
     static constraints = {
+        titularDeCursos nullable: true
     }
 
     void cambiarAulaDeCurso(Curso curso, Aula aulaNueva){

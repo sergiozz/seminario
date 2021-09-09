@@ -72,8 +72,9 @@
                   <select v-model="nroPuntuacion">
                     <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
                   </select>
-                </b-col>
-                <b-col md="10"> <h5>Indique puntuación</h5></b-col> </b-row>       
+                  </b-col>
+                  <b-col md="10"> <h5>Indique puntuación</h5></b-col> 
+                </b-row>       
                 <b-form-textarea                  
                   v-model="textPuntuacion"
                   placeholder="Escribir aquí su opinión..."
@@ -84,6 +85,12 @@
             <div v-else>
               <h4 style="padding: 10px;"> Sin suscripciones registradas</h4>
             </div>
+          </div>
+
+          <!--Reservar Aula para Examen -->         
+          <div v-if="seleccionAccion == (actionsDoc[3] && actionsDoc[3].value)">
+            <h4>Curso</h4>
+            <b-form-select v-model="seleccionCurso" :options="cursosInscriptosList" class="m-2 wid80 roleselecion"/>
           </div>
           
           <!--Respuestas-->
@@ -154,21 +161,27 @@ export default {
       this.nroPuntuacion= 0;
       this.textPuntuacion= '';
       switch (this.seleccionAccion) {
-        //Sumarse a un curso
+        //Alumno - Sumarse a un curso
         case this.actionsAlum[1].value:
           console.log('Sumarse a un curso');
           this.consultaCursos();
           break;
-        //Puntuar un curso
+        //Alumno - Puntuar un curso
         case this.actionsAlum[2].value:
           console.log('Puntuar un curso');
           this.consultaCursosInscriptos();
 
           break;
-        //Consultar cursos inscriptos
+        //Alumno - Consultar cursos inscriptos
         case this.actionsAlum[4].value:
           console.log('Consultar cursos inscriptos');
           this.consultaCursosInscriptos();
+          break;
+
+        //Docente - Reservar Aula para Examen
+        case this.actionsDoc[3].value:
+          console.log('Reservar Aula para Examen');
+          this.consultaCursosTitular();
           break;
       
         default:
@@ -219,6 +232,13 @@ export default {
             });
             break;
         }
+
+        //Notificar sintomas TODO
+        case this.actionsAlum[3].value: {
+            console.log('Notificar sintomas');
+            this.responseMsj = "Gracias por dar aviso. Respeta las medidas sanitarias."         
+            break;
+        }
       
         default:
           break;
@@ -257,6 +277,18 @@ export default {
 
     consultaCursosInscriptos(){
        axios.get(`${this.serverURL}/alumno/getAllCursosInscriptos/${this.$store.state.userLogin.id}`).then(response => {
+          console.log(response.data)
+          this.cursosInscriptosList = [];//.slice();
+          response.data.forEach(element => {
+             this.cursosInscriptosList.push(element)            
+          });
+        }).catch(error => {
+          console.log(error);
+        })     
+    },
+
+    consultaCursosTitular(){
+       axios.get(`${this.serverURL}/docente/getAllTitularDeCursos/${this.$store.state.userLogin.id}`).then(response => {
           console.log(response.data)
           this.cursosInscriptosList = [];//.slice();
           response.data.forEach(element => {

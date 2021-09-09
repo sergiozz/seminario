@@ -15,22 +15,22 @@ public class Constants {
         [ value: 101, text: 'Sumarse a un curso'],
         [ value: 102, text: 'Puntuar un curso'],
         [ value: 103, text: 'Notificar sintomas'],
-        [ value: 104, text: 'Consultar cursos inscriptos']
+        [ value: 104, text: 'Consultar cursos inscriptos'],
+        [ value: 105, text: 'Consultar puntuaciones de cursos']
     ]
     
     def static final ACCIONES_DOCENTE = [
         [ value: 201, text: 'Anunciar Examen'],
         [ value: 202, text: 'Cambio de Aula'],
-        [ value: 203, text: 'Reservar Aula'],
+        [ value: 203, text: 'Reservar Aula para Examen'],
         [ value: 204, text: 'Armado de burbujas'],
         [ value: 205, text: 'Reservar Multiples Aulas'],
         [ value: 206, text: 'Consultar cursos inscriptos'],
-        [ value: 207, text: 'Sumarse a un curso'],
-        [ value: 208, text: 'Cambio de Aula']
+        [ value: 207, text: 'Sumarse a un curso']
     ]
 
     def static final ACCIONES_NO_DOCENTE  = [
-        [ value: 301, text: 'Notificar desinfeccion de Aula'],
+        [ value: 301, text: 'Notificar desinfección de Aula'],
         [ value: 302, text: 'Puntuar un curso'],
         [ value: 303, text: 'Notificar sintomas']
     ]
@@ -38,13 +38,13 @@ public class Constants {
     def static final ACCIONES_MIEMBRO_DEPARTAMENTO  = [
         [ value: 401, text: 'Crear un curso'],
         [ value: 402, text: 'Ver peticiones de cambio'],
-        [ value: 403, text: 'Peticion para desinfeccion de Aula']
+        [ value: 403, text: 'Peticion para desinfección de Aula']
     ]
 
     def static final ACCIONES_ADMIN  = [
         [ value: 501, text: 'Crear un curso'],
         [ value: 502, text: 'Ver peticiones de cambio'],
-        [ value: 503, text: 'Peticion para desinfeccion de Aula']
+        [ value: 503, text: 'Peticion para desinfección de Aula']
     ]
 
     def static final TODAS_LAS_ACCIONES = [ 
