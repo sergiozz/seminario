@@ -172,6 +172,11 @@ export default {
   created () {
     this.getAcciones();   
   },
+  watch: {
+    '$store.state.userLogin.id'() {
+     this.seleccionAccion = 0;
+    },
+  },
   methods: {
     getAcciones() {     
       axios.get(`${this.serverURL}/application/acciones`).then(response => {
