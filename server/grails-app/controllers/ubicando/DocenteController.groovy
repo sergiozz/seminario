@@ -34,25 +34,28 @@ class DocenteController {
         def aulasDisponibles = aulaService.obtenerAulasDisponiblesParaExamen(fechaExamen, requestReservarAula.duracionExamen, requestReservarAula.nroAlumnos)
 
         def mapResponse
-        if (aulasDisponibles.isEmpty()) mapResponse = [status: 400, mensaje: 'Error: No se encontraron aulas disponibles. Pruebe en otro dia u horario.']
+        if (aulasDisponibles.isEmpty()) mapResponse = [status: 400, mensaje: 'No se encontraron aulas disponibles. Pruebe en otro dia u horario.']
         else {            
             Curso curso = Curso.findById(requestReservarAula.idCurso)
             // toma la primera disponible
-            def aulaCandidata = aulasDisponibles.get(0)
+            Aula aulaCandidata = aulasDisponibles.get(0)
             Examen examen = new Examen(fechaExamen: fechaExamen, 
                                         duracion: requestReservarAula.duracionExamen, 
                                         cantidadAlumnos: requestReservarAula.nroAlumnos, 
                                         codMateria: curso.codMateria, 
                                         curso: curso, 
                                         aula: aulaCandidata)
-            def idAsignado = examenService.save(examen)
-            aulaCandidata.addToExamenes(Examen.findById(idAsignado.id))
+
+            def idAsignado = examen.save()
+            aulaService.guardarRelacion(aulaCandidata.id, examen.id)  
+          
+            // aulaCand.addToExamenes(examen)
+            // aulaCand.save()
+            def msjxDesinfeccion = aulaCandidata.pendienteDesinfeccion ? ' Atencion: El aula se encuentra pendiente de desinfeccion! Realice un seguimiento de su estado.' : ''  
 
             mapResponse = [status: 200, mensaje: 'Solicitud agendada exitosamente. El aula asignada es la ' + aulaCandidata.numero + 
-                                            ' del piso '+ aulaCandidata.piso +' de capacidad '+ aulaCandidata.capacidad + 
-                                            (aulaCandidata.pendienteDesinfeccion? '' : ' Atención: El aula se encuentra pendiente de desinfección! Realice un seguimiento de su estado.') ]
+                                            ' del piso '+ aulaCandidata.piso +' de capacidad '+ aulaCandidata.capacidad + ' ' + msjxDesinfeccion ]
         }
-
         respond mapResponse  
     }
 }

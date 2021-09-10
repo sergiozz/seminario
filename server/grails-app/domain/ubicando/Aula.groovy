@@ -70,11 +70,10 @@ class Aula {
         return false
     }
 
-    boolean puedeAgregarExamen(LocalDateTime fechaExamenSolicitud, Long duracionExamen) {
+    boolean puedeAgregarExamen(LocalDateTime fechaExamenSolicitud, def duracionExamen) {
         // busca examenes q contengan a fechaExamenSolicitud
-        println(examenes.size())
-        def resultado = examenes.findAll { (it.fechaExamen.plusHour(it.duracion)).isAfter(fechaExamenSolicitud) ||
-        (fechaExamenSolicitud.plusHour(duracionExamen)).isAfter(it.fechaExamen)  }
+        def resultado = examenes.findAll { (it.fechaExamen.plusHours(it.duracion)).isAfter(fechaExamenSolicitud) ||
+        (fechaExamenSolicitud.plusHours(duracionExamen)).isAfter(it.fechaExamen)  } 
 
         return resultado.isEmpty()
     }

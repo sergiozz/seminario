@@ -29,4 +29,12 @@ abstract class AulaService {
         return Aula.findAllByCapacidadGreaterThanEquals(capacidad, [max: 10, sort: "capacidad", order: "asc"]).findAll {aulaCandidata -> aulaCandidata.puedeAgregarExamen(fechaExamen, duracionExamen)}
     }
 
+    def guardarRelacion(def idAula, def idExamen){
+        Examen examen = Examen.findById(idExamen)
+        Aula aulaCand =  Aula.findById(idAula)
+
+         aulaCand.addToExamenes(examen)        
+    }
+
+
 }
