@@ -125,7 +125,7 @@
           
           <!--Respuestas-->
           <h5 v-if="responseMsj" style="background: aquamarine; padding: 6px;">{{responseMsj}}</h5>
-          <h5 v-if="responseError" style="background: crimson; padding: 6px;">{{responseError}}</h5>
+          <h5 v-if="responseError" style="background: crimson; color: white; padding: 6px;">{{responseError}}</h5>
         </div>
 
         <br>
@@ -174,7 +174,12 @@ export default {
   },
   watch: {
     '$store.state.userLogin.id'() {
-     this.seleccionAccion = 0;
+      this.seleccionAccion = 0;
+      this.responseMsj= '';
+      this.responseError= '';
+      this.selectedPuntuacion= 0;
+      this.nroPuntuacion= 0;
+      this.textPuntuacion= '';
     },
   },
   methods: {

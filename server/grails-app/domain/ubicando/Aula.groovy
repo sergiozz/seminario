@@ -49,18 +49,7 @@ class Aula {
         }
     }
 
-    boolean horarioDisponible(LocalDate dia, Horario horario) {
-        Curso curso_mock = new Curso ()
-        curso_mock.horarios.add(horario)
-        //TODO debug
-        if (this.puedeAgregarCurso(curso_mock)){
-            println("pase por aqui")
-            return this.puedeAgregarExamen(dia, horario)
-        }
-        return false
-    }
-
-    boolean puedeAgregarExamen(LocalDate dia, Horario horario) {
+    boolean chequeoPorExamen(LocalDate dia, Horario horario) {
         boolean superpuesto = false
         int i = 0
         while (!superpuesto && i < examenes.size()){
@@ -70,5 +59,23 @@ class Aula {
             i ++
         }
         return !superpuesto
+    }
+
+    boolean horarioDisponible(LocalDate dia, Horario horario) {
+        Curso curso_mock = new Curso ()
+        curso_mock.horarios.add(horario)
+        if (this.puedeAgregarCurso(curso_mock)){
+            return this.chequeoPorExamen(dia, horario)
+        }
+        return false
+    }
+
+    boolean puedeAgregarExamen(LocalDateTime fechaExamenSolicitud, Long duracionExamen) {
+        // busca examenes q contengan a fechaExamenSolicitud
+        println(examenes.size())
+        def resultado = examenes.findAll { (it.fechaExamen.plusHour(it.duracion)).isAfter(fechaExamenSolicitud) ||
+        (fechaExamenSolicitud.plusHour(duracionExamen)).isAfter(it.fechaExamen)  }
+
+        return resultado.isEmpty()
     }
 }

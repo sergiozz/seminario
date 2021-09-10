@@ -68,9 +68,10 @@ class ApplicationController implements PluginManagerAware {
         if (aulaService.count() == 0){
             mock_aula1 = new Aula(numero: 101, piso: 1, capacidad: 80)
             mock_aula2 = new Aula(numero: 102, piso: 1, capacidad: 75)
-            mock_aula3 = new Aula(numero: 300, piso: 3, capacidad: 100)
+            mock_aula3 = new Aula(numero: 300, piso: 3, capacidad: 95)
             mock_aula4 = new Aula(numero: 303, piso: 3, capacidad: 50)
             mock_aula5 = new Aula(numero: 402, piso: 4, capacidad: 60, pendienteDesinfeccion: true)
+
             aulaService.save(mock_aula1)
             aulaService.save(mock_aula2)
             aulaService.save(mock_aula3)

@@ -1,6 +1,6 @@
 package ubicando
-
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class DocenteController {
@@ -8,6 +8,8 @@ class DocenteController {
     static scaffold = Docente
 
 	def docenteService
+	def aulaService
+	def examenService
 
     def getAll(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -21,31 +23,36 @@ class DocenteController {
 
     def solicitarCambioDeAula(Integer idDocente, Integer idCurso, Integer idAula){
         respond docenteService.solicitarCambioDeAula(idDocente, idCurso, idAula) 
-        //TODO conectar con la historia de solicitar intercambio de aula con otro curso si no hay aulas disponibles
     }
-/* 
-    Integer idDocente
-    Integer idCurso
-    Integer duracionExamen
-    Integer nroAlumnos
-    String fechaExamen
-    String horaExamen */   
 
     def solicitarAulaParaExamen(RequestReservarAula requestReservarAula){
 
-        final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");        
-        final LocalDate fechaExamen = LocalDate.parse(requestReservarAula.fechaExamen + ' ' + requestReservarAula.horaExamen, DATE_FORMAT);
-        println(fechaExamen)
+        final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");        
+        final LocalDateTime fechaExamen = LocalDateTime.parse(requestReservarAula.fechaExamen + ' ' + requestReservarAula.horaExamen, DATE_FORMAT);
+        //println(fechaExamen)
 
-        def aulasDisponibles = aulaService.obtenerAulasDisponiblesParaExamen(fechaExamen, requestReservarAula.nroAlumnos)
-/* 
-        Examen examen = new Examen(diaExamen: fechaExamen, horario: horario3, cantidadAlumnos: requestReservarAula.nroAlumnos)
-        def respuesta = aulaService.solicitarAulaParaExamen(requestSuscribirCurso.idAlumno, requestSuscribirCurso.idCurso) */
- 
+        def aulasDisponibles = aulaService.obtenerAulasDisponiblesParaExamen(fechaExamen, requestReservarAula.duracionExamen, requestReservarAula.nroAlumnos)
+
         def mapResponse
-        if (aulasDisponibles.isEmpty()) mapResponse = [status: 400, mensaje: 'No se encontraron aulas disponibles']
-        else mapResponse = [status: 200, data: aulasDisponibles]
+        if (aulasDisponibles.isEmpty()) mapResponse = [status: 400, mensaje: 'Error: No se encontraron aulas disponibles. Pruebe en otro dia u horario.']
+        else {            
+            Curso curso = Curso.findById(requestReservarAula.idCurso)
+            // toma la primera disponible
+            def aulaCandidata = aulasDisponibles.get(0)
+            Examen examen = new Examen(fechaExamen: fechaExamen, 
+                                        duracion: requestReservarAula.duracionExamen, 
+                                        cantidadAlumnos: requestReservarAula.nroAlumnos, 
+                                        codMateria: curso.codMateria, 
+                                        curso: curso, 
+                                        aula: aulaCandidata)
+            def idAsignado = examenService.save(examen)
+            aulaCandidata.addToExamenes(Examen.findById(idAsignado.id))
 
-        respond mapResponse 
+            mapResponse = [status: 200, mensaje: 'Solicitud agendada exitosamente. El aula asignada es la ' + aulaCandidata.numero + 
+                                            ' del piso '+ aulaCandidata.piso +' de capacidad '+ aulaCandidata.capacidad + 
+                                            (aulaCandidata.pendienteDesinfeccion? '' : ' Atención: El aula se encuentra pendiente de desinfección! Realice un seguimiento de su estado.') ]
+        }
+
+        respond mapResponse  
     }
 }

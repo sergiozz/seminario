@@ -4,31 +4,29 @@ import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 import java.time.LocalDate
 import java.time.LocalDateTime
-//import static Constants.*
 
-@Service(Docente)
+@Service(Aula)
 @Transactional
 abstract class AulaService {
 
-    protected abstract Docente get(Serializable id)
+    protected abstract Aula get(Serializable id)
 
-    protected abstract List<Docente> list(Map args)
+    protected abstract List<Aula> list(Map args)
 
     protected abstract Long count()
 
     protected abstract void delete(Serializable id)
 
-    protected abstract Docente save(Docente docente)
+    protected abstract Aula save(Aula aula)
 
-    def obtenerAulasDisponibles(Integer idCurso, Integer capacidad){
-
-        Curso curso = Curso.FindById(idCurso)
-        //TODO probar en vista para seleccionar aula para el cambio de curso
+    def obtenerAulasDisponiblesParaCambioDeCurso(Integer idCurso, Integer capacidad){
+        Curso curso = Curso.findById(idCurso)
         return Aula.findAllByCapacidadGreaterThanEquals(capacidad).findAll {aulaCandidata -> aulaCandidata.puedeAgregarCurso(curso)}
     }
 
-    def obtenerAulasDisponiblesParaExamen(LocalDate fechaExamen, Integer capacidad){
-        return Aula.findAllByCapacidadGreaterThanEquals(capacidad).findAll {aulaCandidata -> aulaCandidata.puedeAgregarExamen(fechaExamen)}
+    def obtenerAulasDisponiblesParaExamen(LocalDateTime fechaExamen, Integer duracionExamen, Integer capacidad){
+        // ordena en forma ascendente por capacidad asi se toman primero las aulas mas cercanas a lo solicitado
+        return Aula.findAllByCapacidadGreaterThanEquals(capacidad, [max: 10, sort: "capacidad", order: "asc"]).findAll {aulaCandidata -> aulaCandidata.puedeAgregarExamen(fechaExamen, duracionExamen)}
     }
 
 }
